@@ -2,8 +2,8 @@
 Pod::Spec.new do |s|
 
   s.name         = "SSOBaseProvider"
-  s.version      = "0.1.0"
-  s.summary      = "Methods to remove boiler plate code for UICollectionView and UITableView. Most of the methods are meants to be overriden but can be used for basic displaying of the views."
+  s.version      = "0.1.1"
+  s.summary      = "Methods to remove boiler plate code for UICollectionView and UITableView."
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
   s.author             = { "Samsao" => "dev@samsaodev.com" }
   s.social_media_url   = "http://twitter.com/SamsaoDev"
