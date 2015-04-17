@@ -14,6 +14,12 @@
 		D8C83E6F1AE1B64700F187F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E6E1AE1B64700F187F1 /* Images.xcassets */; };
 		D8C83E721AE1B64700F187F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E701AE1B64700F187F1 /* LaunchScreen.xib */; };
 		D8C83E7E1AE1B64700F187F1 /* SSOBaseProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */; };
+		D8C83E961AE1C0EB00F187F1 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */; };
+		D8C83E971AE1C0EB00F187F1 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */; };
+		D8C83E981AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E911AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.m */; };
+		D8C83E991AE1C0EB00F187F1 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E931AE1C0EB00F187F1 /* SSOBaseProvider.m */; };
+		D8C83E9A1AE1C0EB00F187F1 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E951AE1C0EB00F187F1 /* SSOBaseTableViewProvider.m */; };
+		D8C83E9E1AE1C25D00F187F1 /* SSOBaseProvider.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,18 @@
 		D8C83E771AE1B64700F187F1 /* SSOBaseProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSOBaseProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C83E7C1AE1B64700F187F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProviderTests.m; sourceTree = "<group>"; };
+		D8C83E891AE1C0EB00F187F1 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
+		D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
+		D8C83E8B1AE1C0EB00F187F1 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
+		D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
+		D8C83E8E1AE1C0EB00F187F1 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
+		D8C83E901AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
+		D8C83E911AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
+		D8C83E921AE1C0EB00F187F1 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
+		D8C83E931AE1C0EB00F187F1 /* SSOBaseProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProvider.m; sourceTree = "<group>"; };
+		D8C83E941AE1C0EB00F187F1 /* SSOBaseTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseTableViewProvider.h; sourceTree = "<group>"; };
+		D8C83E951AE1C0EB00F187F1 /* SSOBaseTableViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseTableViewProvider.m; sourceTree = "<group>"; };
+		D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSOBaseProvider.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +85,7 @@
 				D8C83E601AE1B64700F187F1 /* SSOBaseProvider */,
 				D8C83E7A1AE1B64700F187F1 /* SSOBaseProviderTests */,
 				D8C83E5F1AE1B64700F187F1 /* Products */,
+				D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,8 +142,43 @@
 		D8C83E871AE1B68400F187F1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D8C83E881AE1C0EB00F187F1 /* Model */,
+				D8C83E8D1AE1C0EB00F187F1 /* Protocols */,
+				D8C83E8F1AE1C0EB00F187F1 /* Providers */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		D8C83E881AE1C0EB00F187F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D8C83E891AE1C0EB00F187F1 /* SSCellViewItem.h */,
+				D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */,
+				D8C83E8B1AE1C0EB00F187F1 /* SSCellViewSection.h */,
+				D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8C83E8D1AE1C0EB00F187F1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D8C83E8E1AE1C0EB00F187F1 /* SSBaseViewCellProtocol.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D8C83E8F1AE1C0EB00F187F1 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D8C83E901AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.h */,
+				D8C83E911AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.m */,
+				D8C83E921AE1C0EB00F187F1 /* SSOBaseProvider.h */,
+				D8C83E931AE1C0EB00F187F1 /* SSOBaseProvider.m */,
+				D8C83E941AE1C0EB00F187F1 /* SSOBaseTableViewProvider.h */,
+				D8C83E951AE1C0EB00F187F1 /* SSOBaseTableViewProvider.m */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C83E9E1AE1C25D00F187F1 /* SSOBaseProvider.podspec in Resources */,
 				D8C83E6D1AE1B64700F187F1 /* Main.storyboard in Resources */,
 				D8C83E721AE1B64700F187F1 /* LaunchScreen.xib in Resources */,
 				D8C83E6F1AE1B64700F187F1 /* Images.xcassets in Resources */,
@@ -227,9 +282,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C83E981AE1C0EB00F187F1 /* SSOBaseCollectionViewProvider.m in Sources */,
 				D8C83E6A1AE1B64700F187F1 /* ViewController.m in Sources */,
+				D8C83E991AE1C0EB00F187F1 /* SSOBaseProvider.m in Sources */,
+				D8C83E9A1AE1C0EB00F187F1 /* SSOBaseTableViewProvider.m in Sources */,
 				D8C83E671AE1B64700F187F1 /* AppDelegate.m in Sources */,
 				D8C83E641AE1B64700F187F1 /* main.m in Sources */,
+				D8C83E971AE1C0EB00F187F1 /* SSCellViewSection.m in Sources */,
+				D8C83E961AE1C0EB00F187F1 /* SSCellViewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
