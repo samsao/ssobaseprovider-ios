@@ -8,6 +8,6 @@
 
 #import "SSOSimpleProvider.h"
 
-@interface SSOSimpleCollectionViewProvider : SSOSimpleProvider
+@interface SSOSimpleCollectionViewProvider : SSOSimpleProvider <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
