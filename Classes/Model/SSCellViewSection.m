@@ -21,6 +21,10 @@
         self.rows = [[NSMutableArray alloc] init];
         self.name = @"";
         self.isSearchable = NO;
+        self.isExpendable = NO;
+        self.expended = YES;
+        self.headerHeight = 0;
+        self.font = [UIFont systemFontOfSize:15];
     }
     return self;
 }
