@@ -14,7 +14,7 @@
 
 @interface SSOBaseProvider : NSObject
 
-@property(weak, nonatomic) NSMutableArray *inputData;
+@property(strong, nonatomic) NSMutableArray *inputData;
 @property(weak, nonatomic) id<SSOProviderDelegate> delegate;
 
 /**
