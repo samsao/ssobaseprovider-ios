@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33619E9B1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */; };
 		D86E08FD1AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */; };
 		D86E08FE1AE6D1CA00711579 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F91AE6D1CA00711579 /* SSOBaseProvider.m */; };
 		D86E08FF1AE6D1CA00711579 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08FB1AE6D1CA00711579 /* SSOBaseTableViewProvider.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		33619E991B04F72200D09ECC /* SSOTableViewHeaderTapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTableViewHeaderTapGesture.h; sourceTree = "<group>"; };
+		33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTableViewHeaderTapGesture.m; sourceTree = "<group>"; };
 		D86E08F61AE6D1CA00711579 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
 		D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
 		D86E08F81AE6D1CA00711579 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
@@ -88,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33619E981B04F71500D09ECC /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				33619E991B04F72200D09ECC /* SSOTableViewHeaderTapGesture.h */,
+				33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */,
+			);
+			name = Gestures;
+			sourceTree = "<group>";
+		};
 		D86E08F51AE6D1CA00711579 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +190,7 @@
 		D8C83E871AE1B68400F187F1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				33619E981B04F71500D09ECC /* Gestures */,
 				D8C83E881AE1C0EB00F187F1 /* Model */,
 				D8C83E8D1AE1C0EB00F187F1 /* Protocols */,
 				D8C83E8F1AE1C0EB00F187F1 /* Providers */,
@@ -326,6 +339,7 @@
 				D86E09081AE6D2B100711579 /* SSOSimpleTableViewProvider.m in Sources */,
 				D86E09021AE6D1DA00711579 /* SSOSimpleProvider.m in Sources */,
 				D8C83E971AE1C0EB00F187F1 /* SSCellViewSection.m in Sources */,
+				33619E9B1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m in Sources */,
 				D8C83E961AE1C0EB00F187F1 /* SSCellViewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

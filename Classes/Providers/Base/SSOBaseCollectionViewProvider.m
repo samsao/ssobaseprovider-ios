@@ -41,15 +41,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:)]) {
-        [self.delegate provider:self didSelectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didSelectRowAtIndexPath:indexPath inView:collectionView];
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:)]) {
-        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath inView:collectionView];
     }
 }
 

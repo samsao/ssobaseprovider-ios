@@ -7,6 +7,7 @@
 //
 
 #import "SSOBaseTableViewProvider.h"
+#import "SSOTableViewHeaderTapGesture.h"
 
 @implementation SSBaseTableViewProvider
 
@@ -18,8 +19,11 @@
         return 0;
     }
     SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
-
-    return [tableViewSection.rows count];
+    if (tableViewSection.expended) {
+        return [tableViewSection.rows count];
+    } else {
+        return 0;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -50,17 +54,86 @@
     return tableView.rowHeight;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+    SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
+
+    UIView *headerView;
+    if (tableViewSection.customHeaderView) {
+        headerView = tableViewSection.customHeaderView;
+    } else {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+        headerView.backgroundColor = tableViewSection.backgroundColor;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 320, 30)];
+        label.text = tableViewSection.name;
+        label.textColor = tableViewSection.textColor;
+        label.font = tableViewSection.font;
+        [headerView addSubview:label];
+    }
+
+    // If the section is expandable add a gesture recognizer to allow expand/collapse of the section and also add an image on the right of the header to show
+    // that it's expandable
+    if (tableViewSection.isExpendable) {
+        SSOTableViewHeaderTapGesture *tapgesture = [[SSOTableViewHeaderTapGesture alloc] initWithTarget:self action:@selector(collapseExpandSection:)];
+        tapgesture.section = tableViewSection;
+        tapgesture.tableView = tableView;
+        tapgesture.sectionIndex = section;
+        [headerView addGestureRecognizer:tapgesture];
+
+        if (tableViewSection.expandImage) {
+            UIImageView *expandImageView = [[UIImageView alloc] initWithImage:tableViewSection.expandImage];
+
+            if (!CGRectIsNull(tableViewSection.expandImageFrame)) {
+                expandImageView.frame = tableViewSection.expandImageFrame;
+            } else {
+                expandImageView.frame = CGRectMake(280, 10, 40, 40);
+            }
+
+            [headerView addSubview:expandImageView];
+        }
+    }
+
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
+    if (tableViewSection.customHeaderView) {
+        return tableViewSection.customHeaderView.frame.size.height;
+    } else if (tableViewSection.headerHeight) {
+        return tableViewSection.headerHeight.floatValue;
+    }
+    return 0;
+}
+
+/**
+ *  Expand or collapse the tapped section and reload it
+ *
+ *  @param tap the tapgesture
+ */
+- (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
+
+    // get the section object from the custom tap
+    SSCellViewSection *section = tap.section;
+
+    NSRange range = NSMakeRange(tap.sectionIndex, 1);
+    NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
+
+    section.expended = !section.expended;
+    [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:)]) {
-        [self.delegate provider:self didSelectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didSelectRowAtIndexPath:indexPath inView:tableView];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:)]) {
-        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath inView:tableView];
     }
 }
 

@@ -13,19 +13,19 @@
 @optional
 
 /**
- *  Overide the tableViewDelegate method
+ *  Overide the tableViewDelegate/collectionViewDelegate method
  *
  *  @param provider  the provider
  *  @param indexPath the indexPath selected
  */
-- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)provider:(id)provider didSelectRowAtIndexPath:(NSIndexPath *)indexPath inView:(id)view;
 
 /**
- *  Overide the tableViewDelegate method
+ *  Overide the tableViewDelegate/collectionViewDelegate method
  *
  *  @param provider  the provider
  *  @param indexPath the indexPath selected
  */
-- (void)provider:(id)provider didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)provider:(id)provider didDeselectRowAtIndexPath:(NSIndexPath *)indexPath inView:(id)view;
 
 @end
