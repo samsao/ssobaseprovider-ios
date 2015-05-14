@@ -34,15 +34,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:)]) {
-        [self.delegate provider:self didSelectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didSelectRowAtIndexPath:indexPath inView:tableView];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
-    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:)]) {
-        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:inView:)]) {
+        [self.delegate provider:self didDeselectRowAtIndexPath:indexPath inView:tableView];
     }
 }
 
