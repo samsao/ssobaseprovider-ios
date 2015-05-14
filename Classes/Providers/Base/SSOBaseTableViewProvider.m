@@ -62,7 +62,7 @@
     if (tableViewSection.customHeaderView) {
         headerView = tableViewSection.customHeaderView;
     } else {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
         headerView.backgroundColor = tableViewSection.backgroundColor;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 320, 30)];
         label.text = tableViewSection.name;
@@ -77,7 +77,6 @@
         SSOTableViewHeaderTapGesture *tapgesture = [[SSOTableViewHeaderTapGesture alloc] initWithTarget:self action:@selector(collapseExpandSection:)];
         tapgesture.section = tableViewSection;
         tapgesture.tableView = tableView;
-        tapgesture.sectionIndex = section;
         [headerView addGestureRecognizer:tapgesture];
 
         if (tableViewSection.expandImage) {
@@ -116,7 +115,7 @@
     // get the section object from the custom tap
     SSCellViewSection *section = tap.section;
 
-    NSRange range = NSMakeRange(tap.sectionIndex, 1);
+    NSRange range = NSMakeRange(section.sectionIndex, 1);
     NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
 
     section.expended = !section.expended;
@@ -140,6 +139,7 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // we need to fire the endAnimationdelegate before it's not always called.
     [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
     [self.delegate provider:self scrollViewDidScroll:scrollView];
 }
