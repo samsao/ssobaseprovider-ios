@@ -83,10 +83,10 @@
         if (tableViewSection.expandImage) {
             UIImageView *expandImageView = [[UIImageView alloc] initWithImage:tableViewSection.expandImage];
 
-            if (!CGRectIsNull(tableViewSection.expandImageFrame)) {
+            if (!CGRectIsEmpty(tableViewSection.expandImageFrame)) {
                 expandImageView.frame = tableViewSection.expandImageFrame;
             } else {
-                expandImageView.frame = CGRectMake(280, 10, 40, 40);
+                expandImageView.frame = CGRectMake(tableView.frame.size.width, 10, 40, [tableView sectionHeaderHeight] - 20);
             }
 
             [headerView addSubview:expandImageView];
@@ -135,6 +135,17 @@
     if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:inView:)]) {
         [self.delegate provider:self didDeselectRowAtIndexPath:indexPath inView:tableView];
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
+    [self.delegate provider:self scrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
 }
 
 @end
