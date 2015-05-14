@@ -11,6 +11,6 @@
 
 @protocol SSOBaseTableViewProviderDelegate;
 
-@interface SSBaseTableViewProvider : SSOBaseProvider <UITableViewDelegate, UITableViewDataSource>
+@interface SSOBaseTableViewProvider : SSOBaseProvider <UITableViewDelegate, UITableViewDataSource>
 
 @end
