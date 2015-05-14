@@ -9,7 +9,7 @@
 #import "SSOBaseTableViewProvider.h"
 #import "SSOTableViewHeaderTapGesture.h"
 
-@implementation SSBaseTableViewProvider
+@implementation SSOBaseTableViewProvider
 
 #pragma mark - UITableViewDataSource
 
