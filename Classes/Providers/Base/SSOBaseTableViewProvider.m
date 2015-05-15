@@ -105,23 +105,6 @@
     return 0;
 }
 
-/**
- *  Expand or collapse the tapped section and reload it
- *
- *  @param tap the tapgesture
- */
-- (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
-
-    // get the section object from the custom tap
-    SSCellViewSection *section = tap.section;
-
-    NSRange range = NSMakeRange(section.sectionIndex, 1);
-    NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
-
-    section.expended = !section.expended;
-    [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
     if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:inView:)]) {
@@ -139,13 +122,36 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // we need to fire the endAnimationdelegate before it's not always called.
-    [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
-    [self.delegate provider:self scrollViewDidScroll:scrollView];
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidScroll:)]) {
+        // we need to fire the scrollViewDidEndScrollingAnimation because it's not always called.
+        [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
+        [self.delegate provider:self scrollViewDidScroll:scrollView];
+    }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidEndScrollingAnimation:)]) {
+        [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
+#pragma mark - Utilities
+
+/**
+ *  Expand or collapse the tapped section and reload it
+ *
+ *  @param tap the tapgesture
+ */
+- (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
+
+    // get the section object from the custom tap
+    SSCellViewSection *section = tap.section;
+
+    NSRange range = NSMakeRange(section.sectionIndex, 1);
+    NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
+
+    section.expended = !section.expended;
+    [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
