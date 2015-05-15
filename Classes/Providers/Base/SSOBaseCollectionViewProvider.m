@@ -53,4 +53,20 @@
     }
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidScroll:)]) {
+        // we need to fire the scrollViewDidEndScrollingAnimation because it's not always called.
+        [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
+        [self.delegate provider:self scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidEndScrollingAnimation:)]) {
+        [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
 @end

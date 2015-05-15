@@ -28,4 +28,20 @@
  */
 - (void)provider:(id)provider didDeselectRowAtIndexPath:(NSIndexPath *)indexPath inView:(id)view;
 
+/**
+ *  Overide the scrollViewDelegate method for tableView and collectionView
+ *
+ *  @param provider   the provider
+ *  @param scrollView the tableView or collectionView
+ */
+- (void)provider:(id)provider scrollViewDidScroll:(id)scrollView;
+
+/**
+ *  Overide the scrollViewDelegate method for tableView and collectionView
+ *
+ *  @param provider   the provider
+ *  @param scrollView the tableView or collectionView
+ */
+- (void)provider:(id)provider scrollViewDidEndScrollingAnimation:(id)scrollView;
+
 @end
