@@ -10,4 +10,13 @@
 
 @implementation SSOSimpleProvider
 
+#pragma mark - Initialization
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.inputData = [NSMutableArray new];
+    }
+    return self;
+}
+
 @end

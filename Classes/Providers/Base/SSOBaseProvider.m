@@ -10,6 +10,15 @@
 
 @implementation SSOBaseProvider
 
+#pragma mark - Initialization
+
+- (instancetype)init {
+    if (self = [super init]) {
+        self.inputData = [NSMutableArray new];
+    }
+    return self;
+}
+
 #pragma mark - Utilities
 
 - (id)objectDataAtIndexPath:(NSIndexPath *)indexPath {
