@@ -62,7 +62,7 @@
     if (tableViewSection.customHeaderView) {
         headerView = tableViewSection.customHeaderView;
     } else {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
         headerView.backgroundColor = tableViewSection.backgroundColor;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 320, 30)];
         label.text = tableViewSection.name;
@@ -77,16 +77,15 @@
         SSOTableViewHeaderTapGesture *tapgesture = [[SSOTableViewHeaderTapGesture alloc] initWithTarget:self action:@selector(collapseExpandSection:)];
         tapgesture.section = tableViewSection;
         tapgesture.tableView = tableView;
-        tapgesture.sectionIndex = section;
         [headerView addGestureRecognizer:tapgesture];
 
         if (tableViewSection.expandImage) {
             UIImageView *expandImageView = [[UIImageView alloc] initWithImage:tableViewSection.expandImage];
 
-            if (!CGRectIsNull(tableViewSection.expandImageFrame)) {
+            if (!CGRectIsEmpty(tableViewSection.expandImageFrame)) {
                 expandImageView.frame = tableViewSection.expandImageFrame;
             } else {
-                expandImageView.frame = CGRectMake(280, 10, 40, 40);
+                expandImageView.frame = CGRectMake(tableView.frame.size.width, 10, 40, [tableView sectionHeaderHeight] - 20);
             }
 
             [headerView addSubview:expandImageView];
@@ -106,23 +105,6 @@
     return 0;
 }
 
-/**
- *  Expand or collapse the tapped section and reload it
- *
- *  @param tap the tapgesture
- */
-- (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
-
-    // get the section object from the custom tap
-    SSCellViewSection *section = tap.section;
-
-    NSRange range = NSMakeRange(tap.sectionIndex, 1);
-    NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
-
-    section.expended = !section.expended;
-    [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Send message to the delegate if the method is implemented
     if ([self.delegate respondsToSelector:@selector(provider:didSelectRowAtIndexPath:inView:)]) {
@@ -135,6 +117,41 @@
     if ([self.delegate respondsToSelector:@selector(provider:didDeselectRowAtIndexPath:inView:)]) {
         [self.delegate provider:self didDeselectRowAtIndexPath:indexPath inView:tableView];
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidScroll:)]) {
+        // we need to fire the scrollViewDidEndScrollingAnimation because it's not always called.
+        [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
+        [self.delegate provider:self scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidEndScrollingAnimation:)]) {
+        [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
+#pragma mark - Utilities
+
+/**
+ *  Expand or collapse the tapped section and reload it
+ *
+ *  @param tap the tapgesture
+ */
+- (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
+
+    // get the section object from the custom tap
+    SSCellViewSection *section = tap.section;
+
+    NSRange range = NSMakeRange(section.sectionIndex, 1);
+    NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
+
+    section.expended = !section.expended;
+    [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

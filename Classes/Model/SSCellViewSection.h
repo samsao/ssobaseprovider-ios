@@ -36,12 +36,16 @@
 // Display an image on the right of the section if the section is expandable.
 @property(nonatomic, strong) UIImage *expandImage;
 
+// Specify a frame for the imageView.
 @property(nonatomic) CGRect expandImageFrame;
 
 #pragma mark Data
 
 // A mutableArray containing the cells in the section.
 @property(strong, nonatomic) NSMutableArray *rows;
+
+// The index of the section in the tableView.
+@property(nonatomic) NSInteger sectionIndex;
 
 // NO by default.
 @property(nonatomic) BOOL isSearchable;
