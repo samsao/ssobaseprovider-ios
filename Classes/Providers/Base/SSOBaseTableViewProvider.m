@@ -91,7 +91,7 @@
             } else {
                 // If NO, set a basic frame for the imageView
                 expandImageView.frame = CGRectMake(tableView.frame.size.width - tableViewSection.headerHeight.floatValue / 3 - 10, 10,
-                                                   tableViewSection.headerHeight.floatValue / 3, tableViewSection.headerHeight.floatValue / 3);
+                                                   tableViewSection.headerHeight.floatValue / 4, tableViewSection.headerHeight.floatValue / 4);
                 // Center Y of the imageView with the center of the header
                 expandImageView.center = CGPointMake(expandImageView.center.x, headerView.center.y);
             }
