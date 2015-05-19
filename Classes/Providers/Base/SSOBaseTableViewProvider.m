@@ -62,7 +62,7 @@
     if (tableViewSection.customHeaderView) {
         headerView = tableViewSection.customHeaderView;
     } else {
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableView.sectionHeaderHeight)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, tableViewSection.headerHeight.floatValue)];
         headerView.backgroundColor = tableViewSection.backgroundColor;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 320, 30)];
         label.text = tableViewSection.name;
@@ -77,19 +77,46 @@
         SSOTableViewHeaderTapGesture *tapgesture = [[SSOTableViewHeaderTapGesture alloc] initWithTarget:self action:@selector(collapseExpandSection:)];
         tapgesture.section = tableViewSection;
         tapgesture.tableView = tableView;
-        [headerView addGestureRecognizer:tapgesture];
 
+        // Check if the section has an image
         if (tableViewSection.expandImage) {
+
+            // Init the imageView
             UIImageView *expandImageView = [[UIImageView alloc] initWithImage:tableViewSection.expandImage];
 
+            // Check if the section has a frame for the imageView
             if (!CGRectIsEmpty(tableViewSection.expandImageFrame)) {
+                // If YES, set the frame to the imageView
                 expandImageView.frame = tableViewSection.expandImageFrame;
             } else {
-                expandImageView.frame = CGRectMake(tableView.frame.size.width, 10, 40, [tableView sectionHeaderHeight] - 20);
+                // If NO, set a basic frame for the imageView
+                expandImageView.frame = CGRectMake(tableView.frame.size.width - tableViewSection.headerHeight.floatValue / 3 - 10, 10,
+                                                   tableViewSection.headerHeight.floatValue / 3, tableViewSection.headerHeight.floatValue / 3);
+                // Center Y of the imageView with the center of the header
+                expandImageView.center = CGPointMake(expandImageView.center.x, headerView.center.y);
             }
 
+            // TODO: I don't like these 2 consecutives if. There must be a way to refactor it.
+            // Check if we want to an imate
+            if (tableViewSection.shouldAnimateSectionImageOnExpand) {
+
+                // Check if the section was collapsed before displaying the image
+                if (tableViewSection.wasCollapsed) {
+                    expandImageView.transform = CGAffineTransformMakeRotation(M_PI);
+                }
+            }
+            // Add the imageView to the header
             [headerView addSubview:expandImageView];
+
+            // Check if we want to an imate
+            if (tableViewSection.shouldAnimateSectionImageOnExpand) {
+
+                // Once we have added the imageView, we have to rotate it depending if the section is expanded or not
+                [self animateImageView:expandImageView forHeaderInSection:tableViewSection];
+            }
         }
+        // Add the tapGesture to the header
+        [headerView addGestureRecognizer:tapgesture];
     }
 
     return headerView;
@@ -97,11 +124,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
+    // If the section has a customView, set the height of the header to the height of the view
     if (tableViewSection.customHeaderView) {
         return tableViewSection.customHeaderView.frame.size.height;
-    } else if (tableViewSection.headerHeight) {
+    }
+    // If we are passing a height for the header.
+    else if (tableViewSection.headerHeight) {
         return tableViewSection.headerHeight.floatValue;
     }
+    // We shouldn't arrive here except if we have no header
     return 0;
 }
 
@@ -151,7 +182,38 @@
     NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
 
     section.expended = !section.expended;
+    // Check if the section is GOING to expand
+    if (section.expended) {
+        section.wasCollapsed = YES;
+    } else {
+        section.wasCollapsed = NO;
+    }
+
     [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+/**
+ *  Animate the rotation of the imageView in the header when the section expand/collapse
+ *
+ *  @param imageView the imageView
+ *  @param section   the section
+ */
+- (void)animateImageView:(UIImageView *)imageView forHeaderInSection:(SSCellViewSection *)section {
+
+    CABasicAnimation *rotate;
+    rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    // TODO: Maybe we should pass the duration as a parameter
+    rotate.duration = 0.3;
+    rotate.repeatCount = 1;
+    rotate.fillMode = kCAFillModeForwards;
+    rotate.removedOnCompletion = NO;
+
+    if (section.expended) {
+        rotate.toValue = [NSNumber numberWithFloat:0];
+    } else {
+        rotate.toValue = [NSNumber numberWithFloat:M_PI];
+    }
+    [imageView.layer addAnimation:rotate forKey:@"10"];
 }
 
 @end

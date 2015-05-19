@@ -50,10 +50,18 @@
 // NO by default.
 @property(nonatomic) BOOL isSearchable;
 
+#pragma mark Expand
+
 // NO by default. If set to YES, the section's header become expandable on touch.
 @property(nonatomic) BOOL isExpendable;
 
-// BOOL for the state of the section.
+// BOOL for the state of the section. This can be used to determine if the section start expanded or not.
 @property(nonatomic) BOOL expended;
+
+// Check if the section was collapsed before making a new animation of the arrow. ** No need to use this. **
+@property(nonatomic) BOOL wasCollapsed;
+
+// Set if we want to animate the imageView in the section.
+@property(nonatomic) BOOL shouldAnimateSectionImageOnExpand;
 
 @end
