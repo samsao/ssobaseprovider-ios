@@ -24,6 +24,7 @@
         self.isExpendable = NO;
         self.expended = YES;
         self.headerHeight = 0;
+        self.shouldAnimateSectionImageOnExpand = NO;
         self.font = [UIFont systemFontOfSize:15];
     }
     return self;
