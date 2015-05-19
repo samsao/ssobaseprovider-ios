@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SSOBaseProvider"
-  s.version      = "0.3.4"
+  s.version      = "0.3.4.1"
   s.summary      = "Methods to remove boiler plate code for UICollectionView and UITableView."
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }
   s.author             = { "Samsao" => "dev@samsaodev.com" }
