@@ -11,7 +11,8 @@
 
 @interface SSOBaseTableViewProvider ()
 
-// MutableArray used to store the state of the section. This is the only option that worked until now. Trying to pass this to the section also failed.
+// MutableArray used to store the state of the section. This is the only option that worked until now. Trying to pass this to the section also failed. We should
+// find a way to use wasCollapsed of section
 @property(nonatomic, strong) NSMutableArray *arrayAnimationState;
 
 @end
