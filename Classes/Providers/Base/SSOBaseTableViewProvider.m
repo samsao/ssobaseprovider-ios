@@ -9,9 +9,29 @@
 #import "SSOBaseTableViewProvider.h"
 #import "SSOTableViewHeaderTapGesture.h"
 
+@interface SSOBaseTableViewProvider ()
+
+// MutableArray used to store the state of the section. This is the only option that worked until now. Trying to pass this to the section also failed. We should
+// find a way to use wasCollapsed of section
+@property(nonatomic, strong) NSMutableArray *arrayAnimationState;
+
+@end
+
 @implementation SSOBaseTableViewProvider
 
 #pragma mark - UITableViewDataSource
+
+- (instancetype)init {
+
+    if (self = [super init]) {
+
+        self.arrayAnimationState = [NSMutableArray new];
+
+        return self;
+    }
+
+    return nil;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (![[self.inputData objectAtIndex:section] isKindOfClass:[SSCellViewSection class]]) {
@@ -58,6 +78,10 @@
 
     SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
 
+    if (section >= self.arrayAnimationState.count) {
+        [self.arrayAnimationState addObject:@(tableViewSection.expended)];
+    }
+
     UIView *headerView;
     if (tableViewSection.customHeaderView) {
         headerView = tableViewSection.customHeaderView;
@@ -101,7 +125,9 @@
             if (tableViewSection.shouldAnimateSectionImageOnExpand) {
 
                 // Check if the section was collapsed before displaying the image
-                if (tableViewSection.wasCollapsed) {
+                if ([self.arrayAnimationState[section] boolValue]) {
+                    expandImageView.transform = CGAffineTransformMakeRotation(0);
+                } else {
                     expandImageView.transform = CGAffineTransformMakeRotation(M_PI);
                 }
             }
@@ -112,7 +138,10 @@
             if (tableViewSection.shouldAnimateSectionImageOnExpand) {
 
                 // Once we have added the imageView, we have to rotate it depending if the section is expanded or not
-                [self animateImageView:expandImageView forHeaderInSection:tableViewSection];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                  [self animateImageView:expandImageView forHeaderInSection:tableViewSection];
+
+                });
             }
         }
         // Add the tapGesture to the header
@@ -125,6 +154,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     SSCellViewSection *tableViewSection = [self.inputData objectAtIndex:section];
     // If the section has a customView, set the height of the header to the height of the view
+    if (tableView.numberOfSections == 1 && [self tableView:tableView numberOfRowsInSection:section] == 0) {
+        return 0;
+    }
+
     if (tableViewSection.customHeaderView) {
         return tableViewSection.customHeaderView.frame.size.height;
     }
@@ -182,12 +215,6 @@
     NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
 
     section.expended = !section.expended;
-    // Check if the section is GOING to expand
-    if (section.expended) {
-        section.wasCollapsed = YES;
-    } else {
-        section.wasCollapsed = NO;
-    }
 
     [tap.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -207,6 +234,12 @@
     rotate.repeatCount = 1;
     rotate.fillMode = kCAFillModeForwards;
     rotate.removedOnCompletion = NO;
+
+    if ([self.arrayAnimationState[section.sectionIndex] boolValue] == section.expended) {
+        return;
+    }
+
+    self.arrayAnimationState[section.sectionIndex] = @(section.expended);
 
     if (section.expended) {
         rotate.toValue = [NSNumber numberWithFloat:0];
