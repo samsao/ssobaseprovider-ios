@@ -8,6 +8,13 @@
 
 #import "SSOBaseProvider.h"
 
+@interface SSOBaseProvider ()
+
+@property(strong, nonatomic, readwrite) NSMutableArray *inputData;
++ (instancetype) new;
+
+@end
+
 @implementation SSOBaseProvider
 
 #pragma mark - Initialization
@@ -17,6 +24,17 @@
         self.inputData = [NSMutableArray new];
     }
     return self;
+}
+
++ (instancetype)newProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
+// Here we ignore the warning, since deprecation is only external to make sure the use of the proper initializer
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    SSOBaseProvider *provider = [SSOBaseProvider new];
+    if (provider) {
+        provider.inputData = [NSMutableArray arrayWithArray:providerData];
+        provider.delegate = delegate;
+    }
+    return provider;
 }
 
 #pragma mark - Utilities

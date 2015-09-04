@@ -21,10 +21,10 @@
 
     //  self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     self.provider = [[SSOBaseTableViewProvider alloc] init];
-
+#warning update Test Code
     self.tableView.delegate = self.provider;
     self.tableView.dataSource = self.provider;
-    self.provider.inputData = [self populateTable].mutableCopy;
+    //    self.provider.inputData = [self populateTable].mutableCopy;
     self.provider.delegate = self;
     // Do any additional setup after loading the view, typically from a nib.
 }
