@@ -7,27 +7,41 @@
 //
 
 #import "SSOBaseCollectionViewProvider.h"
+#import "SSCellViewSection.h"
+#import "SSCellViewItem.h"
+
+@interface SSOBaseCollectionViewProvider ()
+
+@property(weak, nonatomic) UICollectionView *collectionView;
+
+@end
 
 @implementation SSOBaseCollectionViewProvider
+
+#pragma mark - Initialization
+
++ (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
+    SSOBaseCollectionViewProvider *provider = [super newProviderWithData:providerData andDelegate:delegate];
+    if (provider) {
+        collectionView.delegate = provider;
+        collectionView.dataSource = provider;
+        provider.collectionView = collectionView;
+    }
+    return provider;
+}
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (![[self.inputData objectAtIndex:section] isKindOfClass:[SSCellViewSection class]]) {
-        // Should not happen, means it's not a proper object
-        return 0;
-    }
-    SSCellViewSection *collectionViewSection = [self.inputData objectAtIndex:section];
-
-    return [collectionViewSection.rows count];
+    return [self sectionAtIndex:section].rows.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [self.inputData count];
+    return self.allSections.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *collectionViewSection = [self.inputData objectAtIndex:indexPath.section];
+    SSCellViewSection *collectionViewSection = [self sectionAtIndex:indexPath.section];
     SSCellViewItem *collectionViewElement = [collectionViewSection.rows objectAtIndex:indexPath.row];
     id cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
@@ -67,6 +81,38 @@
     if ([self.delegate respondsToSelector:@selector(provider:scrollViewDidEndScrollingAnimation:)]) {
         [self.delegate provider:self scrollViewDidEndScrollingAnimation:scrollView];
     }
+}
+
+#pragma mark - Data
+
+- (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
+    [super addObjectToProviderData:newObject inSection:section];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].rows.count - 1 inSection:section];
+    [self.collectionView insertItemsAtIndexPaths:@[ indexPath ]];
+    return YES;
+}
+
+- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
+    NSInteger removedIndex = [super removeObjectFromProvider:objectToRemove inSection:section];
+    NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:removedIndex inSection:section];
+    if (deleteIndex >= 0) {
+        [self.collectionView deleteItemsAtIndexPaths:@[ deleteIndex ]];
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
+    if ([super updateProviderData:newData inSection:section]) {
+        [self.collectionView reloadData];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
+    [super insertObject:newObject atIndexPath:indexPath];
+    [self.collectionView insertItemsAtIndexPaths:@[ indexPath ]];
 }
 
 @end
