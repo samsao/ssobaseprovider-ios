@@ -7,19 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSCellViewItem.h"
-#import "SSCellViewSection.h"
 #import "SSBaseViewCellProtocol.h"
 #import "SSOProviderDelegate.h"
+@class SSCellViewItem;
+@class SSCellViewSection;
 
 @interface SSOBaseProvider : NSObject
 
-/*! Provider data.
-    Updated to readonly, if you're looking to add, remove or update objects, check the methods bellow:
-    addObjectToProviderData:
-    removeObjectFromProvider:
-    updateProviderData: */
-@property(strong, nonatomic, readonly) NSArray *inputData;
 @property(weak, nonatomic) id<SSOProviderDelegate> delegate;
 
 - (instancetype)init __deprecated_msg("Use newProviderWithData: andDelegate: instead.");
@@ -28,7 +22,7 @@
 /**
  *  Create a instance of provider class with data and delegate
  *
- *  @param providerData array with input data for the provider.
+ *  @param providerData array of SSCellViewSections with it's data.
  *  @param delegate     delegate for provider.
  *
  *  @return instance of provider class
@@ -63,27 +57,60 @@
 - (NSIndexPath *)indexPathForObject:(id)object;
 
 /**
- *  Add an object to provider input data
+ *  Provider data.
+ *  If you're looking to add, remove or update objects, check the methods bellow:
+ addObjectToProviderData:inSection:
+ removeObjectFromProvider:inSection:
+ updateProviderData:inSection:
+ *  @param sectionIndex index of desired section
  *
- *  @param newObject Object to be added in provider input data
+ *  @return section at index
  */
-- (void)addObjectToProviderData:(id)newObject;
+- (SSCellViewSection *)sectionAtIndex:(NSInteger)sectionIndex;
 
 /**
- *  Remove the object from provider input Data
+ *  Get all sections for the provider
+ *
+ *  @return array of SSCellViewSection
+ */
+- (NSArray *)allSections;
+
+/**
+ *  Add an object to provider data in a section
+ *  @param section section for add the object
+ *
+ *  @param newObject Object to be added in provider input data
+ *
+ *  @return if the object was successfuly added
+ */
+- (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section;
+
+/**
+ *  Remove the object from provider Data in a section
  *
  *  @param objectToRemove object to be removed
+ *  @param section section to remove the object from
  *
  *  @return if the object was successfuly removed
  */
-- (BOOL)removeObjectFromProvider:(id)objectToRemove;
+- (BOOL)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section;
 
 /**
- *  Update provider input data
+ *  Update provider data in a section
  *
  *  @param newData new input data
+ *  @param section section to be updated
  *
  *  @return if the data was sucessfuly updated.
  */
-- (BOOL)updateProviderData:(NSArray *)newData;
+
+- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section;
+
+/**
+ *  Insert a new object in a indexpath
+ *
+ *  @param newObject object to be inserted.
+ *  @param indexPath index path to insert the object.
+ */
+- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath;
 @end
