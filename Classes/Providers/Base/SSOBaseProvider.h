@@ -91,9 +91,9 @@
  *  @param objectToRemove object to be removed
  *  @param section section to remove the object from
  *
- *  @return if the object was successfuly removed
+ *  @return index of deleted object. -1 in case object does not exists in section.
  */
-- (BOOL)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section;
+- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section;
 
 /**
  *  Update provider data in a section

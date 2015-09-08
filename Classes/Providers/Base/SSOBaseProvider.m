@@ -96,16 +96,16 @@
     return NO;
 }
 
-- (BOOL)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
-
+- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
+    NSInteger removedIndex = -1;
     if (self.sections.count < section) {
         SSCellViewSection *dataSection = [self.sections objectAtIndex:section];
         if ([dataSection.rows containsObject:objectToRemove]) {
+            removedIndex = [dataSection.rows indexOfObject:objectToRemove];
             [dataSection.rows removeObject:objectToRemove];
-            return YES;
         }
     }
-    return NO;
+    return removedIndex;
 }
 
 - (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
