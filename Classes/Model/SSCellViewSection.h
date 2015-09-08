@@ -11,6 +11,15 @@
 
 @interface SSCellViewSection : NSObject
 
+/**
+ *  Create New section with objects to be displayed in this section
+ *
+ *  @param sectionData data for the section
+ *
+ *  @return instance of SSCellViewSection with data.
+ */
++ (instancetype)newSectionWithData:(NSArray *)sectionData;
+
 #pragma mark Text properties
 
 // The name of the section. Will be displayed in a label.

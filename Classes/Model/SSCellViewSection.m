@@ -10,6 +10,14 @@
 
 @implementation SSCellViewSection
 
++ (instancetype)newSectionWithData:(NSArray *)sectionData {
+    SSCellViewSection *section = [[SSCellViewSection alloc] init];
+    if (section) {
+        section.rows = [NSMutableArray arrayWithArray:sectionData];
+    }
+    return section;
+}
+
 /**
  *  Default initializer
  *
