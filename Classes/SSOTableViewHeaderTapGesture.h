@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SSCellViewSection.h"
+@class SSOProviderSection;
 
 @interface SSOTableViewHeaderTapGesture : UITapGestureRecognizer
 
-@property(nonatomic, strong) SSCellViewSection *section;
+@property(nonatomic, strong) SSOProviderSection *section;
 @property(nonatomic) NSInteger sectionIndex;
 @property(nonatomic, strong) NSArray *rows;
 @property(nonatomic, strong) UITableView *tableView;
