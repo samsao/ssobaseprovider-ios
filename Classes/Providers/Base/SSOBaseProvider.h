@@ -7,36 +7,40 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSBaseViewCellProtocol.h"
+#import "SSOProviderCellProtocol.h"
 #import "SSOProviderDelegate.h"
-@class SSCellViewItem;
-@class SSCellViewSection;
+@class SSOProviderItem;
+@class SSOProviderSection;
 
 @interface SSOBaseProvider : NSObject
 
-@property(weak, nonatomic) id<SSOProviderDelegate> delegate;
+@property(weak, nonatomic, readonly) id<SSOProviderDelegate> delegate;
 
 - (instancetype)init __deprecated_msg("Use newProviderWithData: andDelegate: instead.");
 + (instancetype) new __deprecated_msg("Use newProviderWithData: andDelegate: instead.");
 
 /**
  *  Create a instance of provider class with data and delegate
+ *  Should be only used by subclasses
  *
- *  @param providerData array of SSCellViewSections with it's data.
+ *  @param providerData array of SSOProviderSection with it's data.
  *  @param delegate     delegate for provider.
  *
  *  @return instance of provider class
  */
+
 + (instancetype)newProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate;
 
 /**
- *  Get the object data from an index path. This will get the object data of an item
+ *  Initialize provider with data and delegate
+ *  Should be only used by subclasses
  *
- *  @param indexPath the index path
+ *  @param providerData array of SSOProviderSection with it's data.
+ *  @param delegate     delegate for provider.
  *
- *  @return the object
+ *  @return instance of provider class
  */
-- (id)objectDataAtIndexPath:(NSIndexPath *)indexPath;
+- (instancetype)initProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate;
 
 /**
  *  Get the cell view item from an index path. This will get the cell view item
@@ -45,7 +49,7 @@
  *
  *  @return the cell view item
  */
-- (SSCellViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
+- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Get the index path for a specific object
@@ -66,12 +70,12 @@
  *
  *  @return section at index
  */
-- (SSCellViewSection *)sectionAtIndex:(NSInteger)sectionIndex;
+- (SSOProviderSection *)sectionAtIndex:(NSInteger)sectionIndex;
 
 /**
  *  Get all sections for the provider
  *
- *  @return array of SSCellViewSection
+ *  @return array of SSOProviderSection
  */
 - (NSArray *)allSections;
 
@@ -110,7 +114,31 @@
  *  Insert a new object in a indexpath
  *
  *  @param newObject object to be inserted.
- *  @param indexPath index path to insert the object.
+ *  @param indexPath index path to insert the object. must be a valid index in the section.
+ *
+ *  @return if the item was added or not in the section
  */
-- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath;
+- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ *  Add an array of objects to provider data in a section optmizing the insert for multiples objects.
+ *
+ *  @param section section for add the objects
+ *
+ *  @param newObject Objects to be added to provider data
+ *
+ *  @return if the object was successfuly added
+ */
+- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section;
+
+/**
+ *  Remove the objects from provider data in a section optmizing the deletion for multiple objects.
+ *
+ *  @param objectsToRemove objects to be removed from the provider
+ *  @param section section to remove the objects from
+ *
+ *  @return array with the index of deleted objects. nil in case object does not exists in section.
+ */
+- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section;
+
 @end

@@ -7,12 +7,13 @@
 //
 
 #import "SSOBaseProvider.h"
-#import "SSCellViewItem.h"
-#import "SSCellViewSection.h"
+#import "SSOProviderItem.h"
+#import "SSOProviderSection.h"
 
 @interface SSOBaseProvider ()
 
 @property(strong, nonatomic, readwrite) NSMutableArray *sections;
+@property(weak, nonatomic, readwrite) id<SSOProviderDelegate> delegate;
 
 @end
 
@@ -32,9 +33,9 @@
 
 + (instancetype)newProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
 
-    // Looping trough all items in array to check if they're of SSCellViewSection Type.
-    for (SSCellViewSection *section in providerData) {
-        NSAssert(![section isKindOfClass:[SSCellViewSection class]], @"providerData should be an array of SSCellViewSection.");
+    // Looping trough all items in array to check if they're of SSOProviderSection Type.
+    for (SSOProviderSection *section in providerData) {
+        NSAssert(([section isKindOfClass:[SSOProviderSection class]]), @"providerData should be an array of SSOProviderSection.");
     }
 
 // Here we ignore the warning, since deprecation is only external to make sure the use of the proper initializer
@@ -47,27 +48,37 @@
     return provider;
 }
 
-#pragma mark - Utilities
+- (instancetype)initProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
 
-- (id)objectDataAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *section = [self.sections objectAtIndex:indexPath.section];
-    SSCellViewItem *row = [section.rows objectAtIndex:indexPath.row];
+    // Looping trough all items in array to check if they're of SSOProviderSection Type.
+    for (SSOProviderSection *section in providerData) {
+        NSAssert(([section isKindOfClass:[SSOProviderSection class]]), @"providerData should be an array of SSOProviderSection.");
+    }
 
-    return row.objectData;
+// Here we ignore the warning, since deprecation is only external to make sure the use of the proper initializer
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    self = [super init];
+    if (self) {
+        self.sections = [NSMutableArray arrayWithArray:providerData];
+        self.delegate = delegate;
+    }
+    return self;
 }
 
-- (SSCellViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *section = [self.sections objectAtIndex:indexPath.section];
-    SSCellViewItem *item = [section.rows objectAtIndex:indexPath.row];
+#pragma mark - Utilities
+
+- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    SSOProviderSection *section = [self.sections objectAtIndex:indexPath.section];
+    SSOProviderItem *item = [section.sectionItems objectAtIndex:indexPath.row];
 
     return item;
 }
 
 - (NSIndexPath *)indexPathForObject:(id)object {
-    for (SSCellViewSection *section in self.sections) {
-        for (SSCellViewItem *item in section.rows) {
-            if (item.objectData == object) {
-                return [NSIndexPath indexPathForRow:[section.rows indexOfObject:item] inSection:[self.sections indexOfObject:section]];
+    for (SSOProviderSection *section in self.sections) {
+        for (SSOProviderItem *item in section.sectionItems) {
+            if (item.data == object) {
+                return [NSIndexPath indexPathForRow:[section.sectionItems indexOfObject:item] inSection:[self.sections indexOfObject:section]];
             }
         }
     }
@@ -76,7 +87,7 @@
 
 #pragma mark - Getter
 
-- (SSCellViewSection *)sectionAtIndex:(NSInteger)sectionIndex {
+- (SSOProviderSection *)sectionAtIndex:(NSInteger)sectionIndex {
     return [self.sections objectAtIndex:sectionIndex];
 }
 
@@ -88,21 +99,21 @@
 
 - (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
     NSInteger sectionsAmt = self.sections.count;
-    if (sectionsAmt < section) {
-        SSCellViewSection *dataSection = [self.sections objectAtIndex:section];
-        [dataSection.rows addObject:newObject];
-        return YES;
+    if (sectionsAmt > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        return [dataSection addItemsToSection:@[ newObject ]];
     }
     return NO;
 }
 
 - (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
     NSInteger removedIndex = -1;
-    if (self.sections.count < section) {
-        SSCellViewSection *dataSection = [self.sections objectAtIndex:section];
-        if ([dataSection.rows containsObject:objectToRemove]) {
-            removedIndex = [dataSection.rows indexOfObject:objectToRemove];
-            [dataSection.rows removeObject:objectToRemove];
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];
+        if (indexes) {
+            NSNumber *value = indexes.firstObject;
+            return value.integerValue;
         }
     }
     return removedIndex;
@@ -110,24 +121,40 @@
 
 - (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
 
-    if (self.sections.count < section) {
-        SSCellViewSection *dataSection = [self.sections objectAtIndex:section];
-        dataSection.rows = [NSMutableArray arrayWithArray:newData];
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        [dataSection updateSectionDataTo:newData];
         return YES;
     }
 
     return NO;
 }
 
-- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
-    if (self.sections.count <= indexPath.section) {
-        SSCellViewSection *section = self.sections[indexPath.section];
-        if (section.rows.count <= indexPath.row) {
-            [section.rows insertObject:newObject atIndex:indexPath.row];
-        } else {
-            [section.rows addObject:newObject];
-        }
+- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
+    if (self.sections.count > indexPath.section) {
+        SSOProviderSection *section = self.sections[indexPath.section];
+        return [section addItemToSection:newObject atIndex:indexPath.row];
     }
+    return NO;
+}
+
+- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        [dataSection addItemsToSection:newObjects];
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
+    NSArray *removedIndexes;
+    if (self.sections.count > section) {
+        removedIndexes = [NSMutableArray arrayWithCapacity:objectsToRemove.count];
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        removedIndexes = [dataSection removeItemsFromSection:objectsToRemove];
+    }
+    return removedIndexes;
 }
 
 @end
