@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+__attribute__((deprecated("Use SSOProviderItem instead.")))
 @interface SSCellViewItem : NSObject
 
 @property(strong, nonatomic) NSString *cellReusableIdentifier;

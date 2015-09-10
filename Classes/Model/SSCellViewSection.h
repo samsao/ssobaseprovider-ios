@@ -8,17 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+__attribute__((deprecated("Use SSOProviderSection instead.")))
 @interface SSCellViewSection : NSObject
 
-/**
- *  Create New section with objects to be displayed in this section
- *
- *  @param sectionData data for the section
- *
- *  @return instance of SSCellViewSection with data.
- */
-+ (instancetype)newSectionWithData:(NSArray *)sectionData;
+      /**
+       *  Create New section with objects to be displayed in this section
+       *
+       *  @param sectionData data for the section
+       *
+       *  @return instance of SSCellViewSection with data.
+       */
+      +
+      (instancetype)newSectionWithData : (NSArray *)sectionData;
 
 #pragma mark Text properties
 
