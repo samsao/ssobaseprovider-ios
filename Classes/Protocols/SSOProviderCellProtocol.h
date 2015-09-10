@@ -1,5 +1,5 @@
 //
-//  SSBaseViewCellProtocol.h
+//  SSOProviderCellProtocol.h
 //  Kwirk
 //
 //  Created by Nicolas VINCENSINI on 2014-07-30.
@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+@class SSOProviderItem;
 
-@protocol SSBaseViewCellProtocol
+@protocol SSOProviderCellProtocol
 
 @required
 - (void)configureCell:(id)cellData;

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		33619E9B1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */; };
+		4223B4E21BA1E2CA00457C0B /* SSOTestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4223B4E01BA1E2CA00457C0B /* SSOTestCollectionCell.m */; };
+		4223B4E31BA1E2CA00457C0B /* SSOTestCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4223B4E11BA1E2CA00457C0B /* SSOTestCollectionCell.xib */; };
+		42D9BD7A1BA0C56B00FF5E03 /* SSOProviderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD791BA0C56B00FF5E03 /* SSOProviderItem.m */; };
+		42D9BD7D1BA0C5CB00FF5E03 /* SSOProviderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD7C1BA0C5CB00FF5E03 /* SSOProviderSection.m */; };
+		42D9BD821BA0DB6000FF5E03 /* SSOTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD811BA0DB6000FF5E03 /* SSOTestTableViewController.m */; };
+		42D9BD851BA0DB7000FF5E03 /* SSOTestCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD841BA0DB7000FF5E03 /* SSOTestCollectionViewController.m */; };
+		42D9BD891BA0E12C00FF5E03 /* SSOTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD871BA0E12C00FF5E03 /* SSOTestCell.m */; };
+		42D9BD8A1BA0E12C00FF5E03 /* SSOTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */; };
+		42D9BD8D1BA0E4A700FF5E03 /* SSOTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD8C1BA0E4A700FF5E03 /* SSOTestModel.m */; };
 		D86E08FD1AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */; };
 		D86E08FE1AE6D1CA00711579 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F91AE6D1CA00711579 /* SSOBaseProvider.m */; };
 		D86E08FF1AE6D1CA00711579 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08FB1AE6D1CA00711579 /* SSOBaseTableViewProvider.m */; };
@@ -39,6 +48,22 @@
 /* Begin PBXFileReference section */
 		33619E991B04F72200D09ECC /* SSOTableViewHeaderTapGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTableViewHeaderTapGesture.h; sourceTree = "<group>"; };
 		33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTableViewHeaderTapGesture.m; sourceTree = "<group>"; };
+		4223B4DF1BA1E2CA00457C0B /* SSOTestCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestCollectionCell.h; sourceTree = "<group>"; };
+		4223B4E01BA1E2CA00457C0B /* SSOTestCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestCollectionCell.m; sourceTree = "<group>"; };
+		4223B4E11BA1E2CA00457C0B /* SSOTestCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTestCollectionCell.xib; sourceTree = "<group>"; };
+		42D9BD781BA0C56B00FF5E03 /* SSOProviderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderItem.h; sourceTree = "<group>"; };
+		42D9BD791BA0C56B00FF5E03 /* SSOProviderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOProviderItem.m; sourceTree = "<group>"; };
+		42D9BD7B1BA0C5CB00FF5E03 /* SSOProviderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderSection.h; sourceTree = "<group>"; };
+		42D9BD7C1BA0C5CB00FF5E03 /* SSOProviderSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOProviderSection.m; sourceTree = "<group>"; };
+		42D9BD801BA0DB6000FF5E03 /* SSOTestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestTableViewController.h; sourceTree = "<group>"; };
+		42D9BD811BA0DB6000FF5E03 /* SSOTestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestTableViewController.m; sourceTree = "<group>"; };
+		42D9BD831BA0DB7000FF5E03 /* SSOTestCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestCollectionViewController.h; sourceTree = "<group>"; };
+		42D9BD841BA0DB7000FF5E03 /* SSOTestCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestCollectionViewController.m; sourceTree = "<group>"; };
+		42D9BD861BA0E12C00FF5E03 /* SSOTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestCell.h; sourceTree = "<group>"; };
+		42D9BD871BA0E12C00FF5E03 /* SSOTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestCell.m; sourceTree = "<group>"; };
+		42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTestCell.xib; sourceTree = "<group>"; };
+		42D9BD8B1BA0E4A700FF5E03 /* SSOTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestModel.h; sourceTree = "<group>"; };
+		42D9BD8C1BA0E4A700FF5E03 /* SSOTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestModel.m; sourceTree = "<group>"; };
 		D86E08F61AE6D1CA00711579 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
 		D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
 		D86E08F81AE6D1CA00711579 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
@@ -69,7 +94,7 @@
 		D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
 		D8C83E8B1AE1C0EB00F187F1 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
 		D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
-		D8C83E8E1AE1C0EB00F187F1 /* SSBaseViewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBaseViewCellProtocol.h; sourceTree = "<group>"; };
+		D8C83E8E1AE1C0EB00F187F1 /* SSOProviderCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderCellProtocol.h; sourceTree = "<group>"; };
 		D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSOBaseProvider.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +123,30 @@
 				33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */,
 			);
 			name = Gestures;
+			sourceTree = "<group>";
+		};
+		42D9BD7E1BA0DB3900FF5E03 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				42D9BD831BA0DB7000FF5E03 /* SSOTestCollectionViewController.h */,
+				42D9BD841BA0DB7000FF5E03 /* SSOTestCollectionViewController.m */,
+				4223B4DF1BA1E2CA00457C0B /* SSOTestCollectionCell.h */,
+				4223B4E01BA1E2CA00457C0B /* SSOTestCollectionCell.m */,
+				4223B4E11BA1E2CA00457C0B /* SSOTestCollectionCell.xib */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		42D9BD7F1BA0DB3900FF5E03 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				42D9BD801BA0DB6000FF5E03 /* SSOTestTableViewController.h */,
+				42D9BD811BA0DB6000FF5E03 /* SSOTestTableViewController.m */,
+				42D9BD861BA0E12C00FF5E03 /* SSOTestCell.h */,
+				42D9BD871BA0E12C00FF5E03 /* SSOTestCell.m */,
+				42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		D86E08F51AE6D1CA00711579 /* Base */ = {
@@ -149,6 +198,8 @@
 		D8C83E601AE1B64700F187F1 /* SSOBaseProviderExampleProject */ = {
 			isa = PBXGroup;
 			children = (
+				42D9BD7E1BA0DB3900FF5E03 /* CollectionView */,
+				42D9BD7F1BA0DB3900FF5E03 /* TableView */,
 				D8C83E651AE1B64700F187F1 /* AppDelegate.h */,
 				D8C83E661AE1B64700F187F1 /* AppDelegate.m */,
 				D8C83E681AE1B64700F187F1 /* TestViewController.h */,
@@ -157,6 +208,8 @@
 				D8C83E6E1AE1B64700F187F1 /* Images.xcassets */,
 				D8C83E701AE1B64700F187F1 /* LaunchScreen.xib */,
 				D8C83E611AE1B64700F187F1 /* Supporting Files */,
+				42D9BD8B1BA0E4A700FF5E03 /* SSOTestModel.h */,
+				42D9BD8C1BA0E4A700FF5E03 /* SSOTestModel.m */,
 			);
 			name = SSOBaseProviderExampleProject;
 			path = SSOBaseProvider;
@@ -206,6 +259,10 @@
 				D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */,
 				D8C83E8B1AE1C0EB00F187F1 /* SSCellViewSection.h */,
 				D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */,
+				42D9BD781BA0C56B00FF5E03 /* SSOProviderItem.h */,
+				42D9BD791BA0C56B00FF5E03 /* SSOProviderItem.m */,
+				42D9BD7B1BA0C5CB00FF5E03 /* SSOProviderSection.h */,
+				42D9BD7C1BA0C5CB00FF5E03 /* SSOProviderSection.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,7 +270,7 @@
 		D8C83E8D1AE1C0EB00F187F1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				D8C83E8E1AE1C0EB00F187F1 /* SSBaseViewCellProtocol.h */,
+				D8C83E8E1AE1C0EB00F187F1 /* SSOProviderCellProtocol.h */,
 				D86E09031AE6D20700711579 /* SSOProviderDelegate.h */,
 			);
 			path = Protocols;
@@ -310,6 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C83E9E1AE1C25D00F187F1 /* SSOBaseProvider.podspec in Resources */,
+				4223B4E31BA1E2CA00457C0B /* SSOTestCollectionCell.xib in Resources */,
+				42D9BD8A1BA0E12C00FF5E03 /* SSOTestCell.xib in Resources */,
 				D8C83E6D1AE1B64700F187F1 /* Main.storyboard in Resources */,
 				D8C83E721AE1B64700F187F1 /* LaunchScreen.xib in Resources */,
 				D8C83E6F1AE1B64700F187F1 /* Images.xcassets in Resources */,
@@ -330,15 +389,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D9BD7D1BA0C5CB00FF5E03 /* SSOProviderSection.m in Sources */,
 				D86E08FD1AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m in Sources */,
 				D86E08FF1AE6D1CA00711579 /* SSOBaseTableViewProvider.m in Sources */,
 				D8C83E6A1AE1B64700F187F1 /* TestViewController.m in Sources */,
+				42D9BD851BA0DB7000FF5E03 /* SSOTestCollectionViewController.m in Sources */,
+				42D9BD8D1BA0E4A700FF5E03 /* SSOTestModel.m in Sources */,
 				D8C83E671AE1B64700F187F1 /* AppDelegate.m in Sources */,
+				4223B4E21BA1E2CA00457C0B /* SSOTestCollectionCell.m in Sources */,
 				D86E090B1AE6D46500711579 /* SSOSimpleCollectionViewProvider.m in Sources */,
+				42D9BD7A1BA0C56B00FF5E03 /* SSOProviderItem.m in Sources */,
+				42D9BD821BA0DB6000FF5E03 /* SSOTestTableViewController.m in Sources */,
 				D8C83E641AE1B64700F187F1 /* main.m in Sources */,
 				D86E08FE1AE6D1CA00711579 /* SSOBaseProvider.m in Sources */,
 				D86E09081AE6D2B100711579 /* SSOSimpleTableViewProvider.m in Sources */,
 				D86E09021AE6D1DA00711579 /* SSOSimpleProvider.m in Sources */,
+				42D9BD891BA0E12C00FF5E03 /* SSOTestCell.m in Sources */,
 				D8C83E971AE1C0EB00F187F1 /* SSCellViewSection.m in Sources */,
 				33619E9B1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m in Sources */,
 				D8C83E961AE1C0EB00F187F1 /* SSCellViewItem.m in Sources */,
