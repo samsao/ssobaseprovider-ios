@@ -8,7 +8,8 @@
 
 #import "SSOBaseTableViewProvider.h"
 #import "SSOTableViewHeaderTapGesture.h"
-#import "SSCellViewItem.h"
+#import "SSOProviderItem.h"
+#import "SSOProviderSection.h"
 
 @interface SSOBaseTableViewProvider ()
 
@@ -35,18 +36,20 @@
 }
 
 + (instancetype)newProviderForTableView:(UITableView *)tableView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
-    SSOBaseTableViewProvider *provider = [super newProviderWithData:providerData andDelegate:delegate];
+
+    SSOBaseTableViewProvider *provider = [[SSOBaseTableViewProvider alloc] initProviderWithData:providerData andDelegate:delegate];
     if (provider) {
         provider.arrayAnimationState = [NSMutableArray new];
         tableView.delegate = provider;
         tableView.dataSource = provider;
         provider.tableView = tableView;
+        //        [tableView reloadData];
     }
     return provider;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self sectionAtIndex:section].rows.count;
+    return [self sectionAtIndex:section].sectionItems.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -54,12 +57,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *tableViewSection = [self sectionAtIndex:indexPath.section];
-    SSCellViewItem *tableViewElement = [tableViewSection.rows objectAtIndex:indexPath.row];
+    SSOProviderSection *tableViewSection = [self sectionAtIndex:indexPath.section];
+    SSOProviderItem *tableViewElement = [tableViewSection.sectionItems objectAtIndex:indexPath.row];
+
+    [tableView registerNib:[UINib nibWithNibName:tableViewElement.cellNibName bundle:tableViewElement.cellNibBundle]
+        forCellReuseIdentifier:tableViewElement.cellReusableIdentifier];
 
     id cell = [tableView dequeueReusableCellWithIdentifier:tableViewElement.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
-        [cell configureCell:tableViewElement.objectData];
+        [cell configureCell:tableViewElement.data];
     }
 
     return cell;
@@ -68,8 +74,8 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *tableViewSection = [self sectionAtIndex:indexPath.section];
-    SSCellViewItem *tableViewElement = [tableViewSection.rows objectAtIndex:indexPath.row];
+    SSOProviderSection *tableViewSection = [self sectionAtIndex:indexPath.section];
+    SSOProviderItem *tableViewElement = [tableViewSection.sectionItems objectAtIndex:indexPath.row];
 
     if (tableViewElement.cellHeight) {
         return tableViewElement.cellHeight;
@@ -80,7 +86,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    SSCellViewSection *tableViewSection = [self sectionAtIndex:section];
+    SSOProviderSection *tableViewSection = [self sectionAtIndex:section];
 
     if (section >= self.arrayAnimationState.count) {
         [self.arrayAnimationState addObject:@(tableViewSection.expended)];
@@ -156,7 +162,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    SSCellViewSection *tableViewSection = [self sectionAtIndex:section];
+    SSOProviderSection *tableViewSection = [self sectionAtIndex:section];
     // If the section has a customView, set the height of the header to the height of the view
     if (tableView.numberOfSections == 1 && [self tableView:tableView numberOfRowsInSection:section] == 0) {
         return 0;
@@ -213,7 +219,7 @@
 - (void)collapseExpandSection:(SSOTableViewHeaderTapGesture *)tap {
 
     // get the section object from the custom tap
-    SSCellViewSection *section = tap.section;
+    SSOProviderSection *section = tap.section;
 
     NSRange range = NSMakeRange(section.sectionIndex, 1);
     NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];
@@ -229,7 +235,7 @@
  *  @param imageView the imageView
  *  @param section   the section
  */
-- (void)animateImageView:(UIImageView *)imageView forHeaderInSection:(SSCellViewSection *)section {
+- (void)animateImageView:(UIImageView *)imageView forHeaderInSection:(SSOProviderSection *)section {
 
     CABasicAnimation *rotate;
     rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
@@ -257,7 +263,7 @@
 
 - (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
     [super addObjectToProviderData:newObject inSection:section];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].rows.count - 1 inSection:section];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].sectionItems.count - 1 inSection:section];
     [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
     return YES;
 }
@@ -265,7 +271,7 @@
 - (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
     NSInteger removedIndex = [super removeObjectFromProvider:objectToRemove inSection:section];
     NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:removedIndex inSection:section];
-    if (deleteIndex >= 0) {
+    if (removedIndex >= 0) {
         [self.tableView deleteRowsAtIndexPaths:@[ deleteIndex ] withRowAnimation:UITableViewRowAnimationAutomatic];
         return YES;
     }
@@ -274,14 +280,51 @@
 
 - (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
     if ([super updateProviderData:newData inSection:section]) {
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
         return YES;
     }
     return NO;
 }
 
-- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
-    [super insertObject:newObject atIndexPath:indexPath];
-    [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
+    BOOL wasSuccessful = [super addObject:newObject atIndexPath:indexPath];
+    if (wasSuccessful) {
+        [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+        return YES;
+    }
+    return NO;
 }
+
+- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
+    if ([super addObjectsToProviderData:newObjects inSection:section]) {
+        SSOProviderSection *tableSection = [self sectionAtIndex:section];
+        NSInteger rowIndex = tableSection.sectionItems.count - newObjects.count - 1;
+        NSIndexPath *indexPath;
+        NSMutableArray *indexesArray = [NSMutableArray arrayWithCapacity:newObjects.count];
+        for (; rowIndex < tableSection.sectionItems.count; rowIndex++) {
+            indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:section];
+            [indexesArray addObject:indexPath];
+        }
+
+        [self.tableView insertRowsAtIndexPaths:indexesArray withRowAnimation:UITableViewRowAnimationAutomatic];
+
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
+    NSArray *removedIndexes = [super removeObjectsFromProvider:objectsToRemove inSection:section];
+    if (removedIndexes) {
+        NSMutableArray *indexPathsToRemove = [NSMutableArray arrayWithCapacity:objectsToRemove.count];
+        NSIndexPath *indexPath;
+        for (NSNumber *removedIndex in removedIndexes) {
+            indexPath = [NSIndexPath indexPathForRow:removedIndex.integerValue inSection:section];
+            [indexPathsToRemove addObject:indexPath];
+        }
+        [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    return removedIndexes;
+}
+
 @end

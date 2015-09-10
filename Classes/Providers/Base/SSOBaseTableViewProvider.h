@@ -21,7 +21,7 @@
  *  Set tableview delegate and datasource to the new provider instance.
  *
  *  @param tableView tableview to be handled by the provider.
- *  @param providerData array of SSCellViewSections with it's data.
+ *  @param providerData array of SSProviderSection with it's data.
  *  @param delegate     delegate for provider.
  *
  *  @return instance of table view provider class
