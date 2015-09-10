@@ -7,8 +7,8 @@
 //
 
 #import "SSOBaseCollectionViewProvider.h"
-#import "SSCellViewSection.h"
-#import "SSCellViewItem.h"
+#import "SSOProviderSection.h"
+#import "SSOProviderItem.h"
 
 @interface SSOBaseCollectionViewProvider ()
 
@@ -21,7 +21,7 @@
 #pragma mark - Initialization
 
 + (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
-    SSOBaseCollectionViewProvider *provider = [super newProviderWithData:providerData andDelegate:delegate];
+    SSOBaseCollectionViewProvider *provider = [[SSOBaseCollectionViewProvider alloc] initProviderWithData:providerData andDelegate:delegate];
     if (provider) {
         collectionView.delegate = provider;
         collectionView.dataSource = provider;
@@ -33,7 +33,7 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self sectionAtIndex:section].rows.count;
+    return [self sectionAtIndex:section].sectionItems.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -41,11 +41,14 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SSCellViewSection *collectionViewSection = [self sectionAtIndex:indexPath.section];
-    SSCellViewItem *collectionViewElement = [collectionViewSection.rows objectAtIndex:indexPath.row];
+    SSOProviderSection *collectionViewSection = [self sectionAtIndex:indexPath.section];
+    SSOProviderItem *collectionViewElement = [collectionViewSection.sectionItems objectAtIndex:indexPath.row];
+
+    [collectionView registerNib:[UINib nibWithNibName:collectionViewElement.cellNibName bundle:collectionViewElement.cellNibBundle]
+        forCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier];
     id cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
-        [cell configureCell:collectionViewElement.objectData];
+        [cell configureCell:collectionViewElement.data];
     }
 
     return cell;
@@ -87,7 +90,7 @@
 
 - (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
     [super addObjectToProviderData:newObject inSection:section];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].rows.count - 1 inSection:section];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].sectionItems.count - 1 inSection:section];
     [self.collectionView insertItemsAtIndexPaths:@[ indexPath ]];
     return YES;
 }
@@ -104,15 +107,50 @@
 
 - (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
     if ([super updateProviderData:newData inSection:section]) {
-        [self.collectionView reloadData];
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
         return YES;
     }
     return NO;
 }
 
-- (void)insertObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
-    [super insertObject:newObject atIndexPath:indexPath];
-    [self.collectionView insertItemsAtIndexPaths:@[ indexPath ]];
+- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
+    BOOL wasInserted = [super addObject:newObject atIndexPath:indexPath];
+    if (wasInserted) {
+        [self.collectionView insertItemsAtIndexPaths:@[ indexPath ]];
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
+    if ([super addObjectsToProviderData:newObjects inSection:section]) {
+        SSOProviderSection *dataSection = [self sectionAtIndex:section];
+        NSInteger rowIndex = dataSection.sectionItems.count - newObjects.count;
+        NSIndexPath *indexPath;
+        NSMutableArray *indexesArray = [NSMutableArray arrayWithCapacity:newObjects.count];
+        for (; rowIndex < dataSection.sectionItems.count; rowIndex++) {
+            indexPath = [NSIndexPath indexPathForItem:rowIndex inSection:section];
+            [indexesArray addObject:indexPath];
+        }
+        [self.collectionView insertItemsAtIndexPaths:indexesArray];
+
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
+    NSArray *removedIndexes = [super removeObjectsFromProvider:objectsToRemove inSection:section];
+    if (removedIndexes) {
+        NSMutableArray *indexPathsToRemove = [NSMutableArray arrayWithCapacity:objectsToRemove.count];
+        NSIndexPath *indexPath;
+        for (NSNumber *removedIndex in removedIndexes) {
+            indexPath = [NSIndexPath indexPathForRow:removedIndex.integerValue inSection:section];
+            [indexPathsToRemove addObject:indexPath];
+        }
+        [self.collectionView deleteItemsAtIndexPaths:indexPathsToRemove];
+    }
+    return removedIndexes;
 }
 
 @end
