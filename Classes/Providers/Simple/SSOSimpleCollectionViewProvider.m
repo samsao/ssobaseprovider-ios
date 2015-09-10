@@ -7,7 +7,7 @@
 //
 
 #import "SSOSimpleCollectionViewProvider.h"
-#import "SSBaseViewCellProtocol.h"
+#import "SSOProviderCellProtocol.h"
 
 @implementation SSOSimpleCollectionViewProvider
 
@@ -24,7 +24,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    UICollectionViewCell<SSBaseViewCellProtocol> *cell =
+    UICollectionViewCell<SSOProviderCellProtocol> *cell =
         [collectionView dequeueReusableCellWithReuseIdentifier:self.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
         [cell configureCell:[self.inputData objectAtIndex:indexPath.row]];

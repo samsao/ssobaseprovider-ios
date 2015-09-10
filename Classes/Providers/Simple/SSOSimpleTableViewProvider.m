@@ -7,7 +7,7 @@
 //
 
 #import "SSOSimpleTableViewProvider.h"
-#import "SSBaseViewCellProtocol.h"
+#import "SSOProviderCellProtocol.h"
 
 @implementation SSOSimpleTableViewProvider
 
@@ -22,7 +22,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell<SSBaseViewCellProtocol> *cell = [tableView dequeueReusableCellWithIdentifier:self.cellReusableIdentifier forIndexPath:indexPath];
+    UITableViewCell<SSOProviderCellProtocol> *cell = [tableView dequeueReusableCellWithIdentifier:self.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
         [cell configureCell:[self.inputData objectAtIndex:indexPath.row]];
     }
