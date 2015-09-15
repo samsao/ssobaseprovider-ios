@@ -80,6 +80,43 @@
 - (NSArray *)allSections;
 
 /**
+ *  Add New Sections to the provider.
+ *
+ *  @param newSections new sections to be added.
+ *
+ *  @return if the new sections were added or not.
+ */
+- (BOOL)addNewSections:(NSArray *)newSections;
+
+/**
+ *  Add new SSOProviderSection to provider.
+ *
+ *  @param newSection   new section to be added to provider
+ *  @param sectionIndex index of new section to be added.
+ *
+ *  @return if the section was added or not.
+ */
+- (BOOL)addNewSection:(SSOProviderSection *)newSection AtIndex:(NSInteger)sectionIndex;
+
+/**
+ *  Remove a section at index
+ *
+ *  @param sectionIndex index of the section to be removed
+ *
+ *  @return if the section was removed.
+ */
+- (BOOL)removeSectionAtIndex:(NSInteger)sectionIndex;
+
+/**
+ *  Remove sections from the section
+ *
+ *  @param sectionsToBeRemoved sections to be removed
+ *
+ *  @return indexes of the removed sections.
+ */
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved;
+
+/**
  *  Add an object to provider data in a section
  *  @param section section for add the object
  *

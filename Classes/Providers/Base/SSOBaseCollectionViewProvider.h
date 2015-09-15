@@ -24,4 +24,17 @@
  */
 + (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate;
 
+/**
+ *  This method should not be used. Use RemoveSections instead.
+ */
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved;
+
+/**
+ *  Remove sections in the array from the collection view.
+ *
+ *  @param sectionsToBeRemoved array of SSOProviderSection to be removed
+ *  @param completion          block with removed indexes to be called once the operation is complete.
+ *  @return Indexes of the sections removed from collection view.
+ */
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved withCompletionBlock:(void (^)(NSArray *removedIndexes))completion;
 @end
