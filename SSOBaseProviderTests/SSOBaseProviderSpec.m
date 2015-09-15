@@ -18,8 +18,7 @@
 NSString *const kTestRI = @"";
 NSString *const kTestNib = @"";
 
-SpecBegin(SSOBaseProvider)
-describe(@"Base Provider", ^{
+SpecBegin(SSOBaseProvider) describe(@"Base Provider", ^{
   // Creating Data
 
   SSOTestModel *td = [SSOTestModel new];
@@ -92,7 +91,7 @@ describe(@"Base Provider", ^{
           expect(currentSection.sectionItems).to.contain(c);
       }
     });
-
+#warning TODO: ADD Test for ADD/Remove Sections
   });
 });
 SpecEnd
