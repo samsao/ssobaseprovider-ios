@@ -17,6 +17,10 @@
 		42D9BD891BA0E12C00FF5E03 /* SSOTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD871BA0E12C00FF5E03 /* SSOTestCell.m */; };
 		42D9BD8A1BA0E12C00FF5E03 /* SSOTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */; };
 		42D9BD8D1BA0E4A700FF5E03 /* SSOTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD8C1BA0E4A700FF5E03 /* SSOTestModel.m */; };
+		42E733241BA38180003A5545 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 42E733231BA38180003A5545 /* Podfile */; };
+		42E733251BA381A5003A5545 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 42E733231BA38180003A5545 /* Podfile */; };
+		42F0A22C1BA732B10004B9CA /* SSOBaseProviderSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F0A22B1BA732B10004B9CA /* SSOBaseProviderSpec.m */; };
+		BFC3FA1DCC03EACD14FC8C9A /* libPods-SSOBaseProviderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E227DE8C1AD83659ED8F64 /* libPods-SSOBaseProviderTests.a */; };
 		D86E08FD1AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */; };
 		D86E08FE1AE6D1CA00711579 /* SSOBaseProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08F91AE6D1CA00711579 /* SSOBaseProvider.m */; };
 		D86E08FF1AE6D1CA00711579 /* SSOBaseTableViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E08FB1AE6D1CA00711579 /* SSOBaseTableViewProvider.m */; };
@@ -64,6 +68,10 @@
 		42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTestCell.xib; sourceTree = "<group>"; };
 		42D9BD8B1BA0E4A700FF5E03 /* SSOTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestModel.h; sourceTree = "<group>"; };
 		42D9BD8C1BA0E4A700FF5E03 /* SSOTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestModel.m; sourceTree = "<group>"; };
+		42E733231BA38180003A5545 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		42F0A22B1BA732B10004B9CA /* SSOBaseProviderSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProviderSpec.m; sourceTree = "<group>"; };
+		A7E227DE8C1AD83659ED8F64 /* libPods-SSOBaseProviderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SSOBaseProviderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B524CAA6F59621135E84BA91 /* Pods-SSOBaseProviderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSOBaseProviderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SSOBaseProviderTests/Pods-SSOBaseProviderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D86E08F61AE6D1CA00711579 /* SSOBaseCollectionViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseCollectionViewProvider.h; sourceTree = "<group>"; };
 		D86E08F71AE6D1CA00711579 /* SSOBaseCollectionViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOBaseCollectionViewProvider.m; sourceTree = "<group>"; };
 		D86E08F81AE6D1CA00711579 /* SSOBaseProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOBaseProvider.h; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 		D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewSection.m; sourceTree = "<group>"; };
 		D8C83E8E1AE1C0EB00F187F1 /* SSOProviderCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderCellProtocol.h; sourceTree = "<group>"; };
 		D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSOBaseProvider.podspec; sourceTree = "<group>"; };
+		E1AFF2D9F7FD9CAED82A4036 /* Pods-SSOBaseProviderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSOBaseProviderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SSOBaseProviderTests/Pods-SSOBaseProviderTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC3FA1DCC03EACD14FC8C9A /* libPods-SSOBaseProviderTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +159,23 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		A15751551383B7AEB2CBFA45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7E227DE8C1AD83659ED8F64 /* libPods-SSOBaseProviderTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9B278E3D6370DF87D70FF94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B524CAA6F59621135E84BA91 /* Pods-SSOBaseProviderTests.debug.xcconfig */,
+				E1AFF2D9F7FD9CAED82A4036 /* Pods-SSOBaseProviderTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D86E08F51AE6D1CA00711579 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,11 +205,14 @@
 		D8C83E551AE1B64700F187F1 = {
 			isa = PBXGroup;
 			children = (
+				42E733231BA38180003A5545 /* Podfile */,
 				D8C83E871AE1B68400F187F1 /* Classes */,
 				D8C83E601AE1B64700F187F1 /* SSOBaseProviderExampleProject */,
 				D8C83E7A1AE1B64700F187F1 /* SSOBaseProviderTests */,
 				D8C83E5F1AE1B64700F187F1 /* Products */,
 				D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */,
+				C9B278E3D6370DF87D70FF94 /* Pods */,
+				A15751551383B7AEB2CBFA45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +259,7 @@
 			children = (
 				D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */,
 				D8C83E7B1AE1B64700F187F1 /* Supporting Files */,
+				42F0A22B1BA732B10004B9CA /* SSOBaseProviderSpec.m */,
 			);
 			path = SSOBaseProviderTests;
 			sourceTree = "<group>";
@@ -309,9 +340,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8C83E841AE1B64700F187F1 /* Build configuration list for PBXNativeTarget "SSOBaseProviderTests" */;
 			buildPhases = (
+				ED1F09033B4AC3D334990C32 /* Check Pods Manifest.lock */,
 				D8C83E731AE1B64700F187F1 /* Sources */,
 				D8C83E741AE1B64700F187F1 /* Frameworks */,
 				D8C83E751AE1B64700F187F1 /* Resources */,
+				91FAD6F65810FB684D38894A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -371,6 +404,7 @@
 				42D9BD8A1BA0E12C00FF5E03 /* SSOTestCell.xib in Resources */,
 				D8C83E6D1AE1B64700F187F1 /* Main.storyboard in Resources */,
 				D8C83E721AE1B64700F187F1 /* LaunchScreen.xib in Resources */,
+				42E733241BA38180003A5545 /* Podfile in Resources */,
 				D8C83E6F1AE1B64700F187F1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,10 +413,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E733251BA381A5003A5545 /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		91FAD6F65810FB684D38894A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SSOBaseProviderTests/Pods-SSOBaseProviderTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED1F09033B4AC3D334990C32 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D8C83E5A1AE1B64700F187F1 /* Sources */ = {
@@ -415,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F0A22C1BA732B10004B9CA /* SSOBaseProviderSpec.m in Sources */,
 				D8C83E7E1AE1B64700F187F1 /* SSOBaseProviderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,6 +626,7 @@
 		};
 		D8C83E851AE1B64700F187F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B524CAA6F59621135E84BA91 /* Pods-SSOBaseProviderTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -576,6 +646,7 @@
 		};
 		D8C83E861AE1B64700F187F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1AFF2D9F7FD9CAED82A4036 /* Pods-SSOBaseProviderTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
