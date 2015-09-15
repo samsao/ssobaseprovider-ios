@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SSOProviderDelegate.h"
 
-@interface SSOSimpleProvider : NSObject
+__attribute__((deprecated("Use SSOBaseProvider instead."))) @interface SSOSimpleProvider : NSObject
 
-@property(strong, nonatomic) NSMutableArray *inputData;
+                                                                                           @property(strong, nonatomic) NSMutableArray *inputData;
 @property(strong, nonatomic) NSString *cellReusableIdentifier;
 @property(weak, nonatomic) id<SSOProviderDelegate> delegate;
 

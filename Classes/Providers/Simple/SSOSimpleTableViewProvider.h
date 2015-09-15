@@ -8,6 +8,7 @@
 
 #import "SSOSimpleProvider.h"
 
-@interface SSOSimpleTableViewProvider : SSOSimpleProvider <UITableViewDelegate, UITableViewDataSource>
+__attribute__((deprecated("Use SSOSimpleTableViewProvider instead.")))
+@interface SSOSimpleTableViewProvider : SSOSimpleProvider<UITableViewDelegate, UITableViewDataSource>
 
 @end

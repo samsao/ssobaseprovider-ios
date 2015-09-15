@@ -7,7 +7,7 @@
 //
 
 #import "SSOSimpleProvider.h"
-
+__attribute__((deprecated("Use SSOSimpleCollectionViewProvider instead.")))
 @interface SSOSimpleCollectionViewProvider : SSOSimpleProvider <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
