@@ -261,18 +261,44 @@
 
 #pragma mark - Data
 
+/**
+ *  Private method.
+ *  Add new rows in table view at paths.
+ *
+ *  @param indexPaths index paths of added rows
+ */
+- (void)addNewRowsToTableViewAtIndexPaths:(NSArray *)indexPaths withAnimation:(UITableViewRowAnimation)animation {
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+    [self.tableView endUpdates];
+}
+
+/**
+ *  Private method.
+ *  remove rows in table view at index paths.
+ *
+ *  @param indexPaths index paths of removed rows
+ */
+- (void)removeRowsToTableViewAtIndexPaths:(NSArray *)indexPaths withAnimation:(UITableViewRowAnimation)animation {
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+    [self.tableView endUpdates];
+}
+
 - (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
-    [super addObjectToProviderData:newObject inSection:section];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].sectionItems.count - 1 inSection:section];
-    [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
-    return YES;
+    BOOL wasAdded = [super addObjectToProviderData:newObject inSection:section];
+    if (wasAdded) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self sectionAtIndex:section].sectionItems.count - 1 inSection:section];
+        [self addNewRowsToTableViewAtIndexPaths:@[ indexPath ] withAnimation:UITableViewRowAnimationAutomatic];
+    }
+    return wasAdded;
 }
 
 - (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
     NSInteger removedIndex = [super removeObjectFromProvider:objectToRemove inSection:section];
     NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:removedIndex inSection:section];
     if (removedIndex >= 0) {
-        [self.tableView deleteRowsAtIndexPaths:@[ deleteIndex ] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self removeRowsToTableViewAtIndexPaths:@[ deleteIndex ] withAnimation:UITableViewRowAnimationAutomatic];
         return YES;
     }
     return NO;
@@ -280,7 +306,9 @@
 
 - (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
     if ([super updateProviderData:newData inSection:section]) {
+        [self.tableView beginUpdates];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
         return YES;
     }
     return NO;
@@ -289,7 +317,7 @@
 - (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
     BOOL wasSuccessful = [super addObject:newObject atIndexPath:indexPath];
     if (wasSuccessful) {
-        [self.tableView insertRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self addNewRowsToTableViewAtIndexPaths:@[ indexPath ] withAnimation:UITableViewRowAnimationAutomatic];
         return YES;
     }
     return NO;
@@ -305,8 +333,7 @@
             indexPath = [NSIndexPath indexPathForRow:rowIndex inSection:section];
             [indexesArray addObject:indexPath];
         }
-
-        [self.tableView insertRowsAtIndexPaths:indexesArray withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self addNewRowsToTableViewAtIndexPaths:indexesArray withAnimation:UITableViewRowAnimationAutomatic];
 
         return YES;
     }
@@ -322,7 +349,69 @@
             indexPath = [NSIndexPath indexPathForRow:removedIndex.integerValue inSection:section];
             [indexPathsToRemove addObject:indexPath];
         }
-        [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self removeRowsToTableViewAtIndexPaths:indexPathsToRemove withAnimation:UITableViewRowAnimationAutomatic];
+    }
+    return removedIndexes;
+}
+
+#pragma mark - Section
+/**
+ *  Private method.
+ *  Add a new section in table view at index set.
+ *
+ *  @param indexSet index set of added sections
+ */
+- (void)addNewSectionInTableViewAtIndexSet:(NSIndexSet *)indexSet {
+
+    [self.tableView beginUpdates];
+    [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
+/**
+ *  Private Method.
+ *  Remove sections from table view at indexes
+ *
+ *  @param indexes indexes of the sections to be deleted from tableview.
+ */
+- (void)removeSectionInTableViewAtIndexes:(NSArray *)indexes {
+
+    [self.tableView beginUpdates];
+    // We cant be sure indexes will always be in a specific range, so delete trough a loop
+    for (NSNumber *index in indexes) {
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:index.integerValue] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    [self.tableView endUpdates];
+}
+
+- (BOOL)addNewSections:(NSArray *)newSections {
+    NSRange range = NSMakeRange(self.allSections.count, newSections.count);
+    BOOL wasAdded = [super addNewSections:newSections];
+    if (wasAdded) {
+        [self addNewSectionInTableViewAtIndexSet:[NSIndexSet indexSetWithIndexesInRange:range]];
+    }
+    return wasAdded;
+}
+- (BOOL)addNewSection:(SSOProviderSection *)newSection AtIndex:(NSInteger)sectionIndex {
+    BOOL wasAdded = [super addNewSection:newSection AtIndex:sectionIndex];
+    if (wasAdded) {
+        [self addNewSectionInTableViewAtIndexSet:[NSIndexSet indexSetWithIndex:sectionIndex]];
+    }
+    return wasAdded;
+}
+
+- (BOOL)removeSectionAtIndex:(NSInteger)sectionIndex {
+    if ([super removeSectionAtIndex:sectionIndex]) {
+        [self removeSectionInTableViewAtIndexes:@[ @(sectionIndex) ]];
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved {
+    NSArray *removedIndexes = [super removeSections:sectionsToBeRemoved];
+    if (removedIndexes) {
+        [self removeSectionInTableViewAtIndexes:sectionsToBeRemoved];
     }
     return removedIndexes;
 }

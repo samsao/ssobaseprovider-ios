@@ -153,4 +153,60 @@
     return removedIndexes;
 }
 
+#pragma mark - Section
+
+/**
+ *  Private Method.
+ *  Remove sections from table view at indexes
+ *
+ *  @param indexes indexes of the sections to be deleted from tableview.
+ */
+- (void)removeSectionInCollectionViewAtIndexes:(NSArray *)indexes withCompletionBlock:(void (^)(BOOL finished))completion {
+
+    [self.collectionView performBatchUpdates:^{
+      for (NSNumber *index in indexes) {
+          [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:index.integerValue]];
+      }
+    } completion:completion];
+}
+
+- (BOOL)addNewSections:(NSArray *)newSections {
+    NSRange range = NSMakeRange(self.allSections.count, newSections.count);
+    BOOL wasAdded = [super addNewSections:newSections];
+    if (wasAdded) {
+        [self.collectionView insertSections:[NSIndexSet indexSetWithIndexesInRange:range]];
+    }
+    return wasAdded;
+}
+- (BOOL)addNewSection:(SSOProviderSection *)newSection AtIndex:(NSInteger)sectionIndex {
+    BOOL wasAdded = [super addNewSection:newSection AtIndex:sectionIndex];
+    if (wasAdded) {
+        [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+    }
+    return wasAdded;
+}
+
+- (BOOL)removeSectionAtIndex:(NSInteger)sectionIndex {
+    if ([super removeSectionAtIndex:sectionIndex]) {
+        [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved {
+    @throw [NSException exceptionWithName:@"Wrong method" reason:@"Use removeSections: withCompletionBlock: instead." userInfo:nil];
+}
+
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved withCompletionBlock:(void (^)(NSArray *removedIndexes))completion {
+    NSArray *removedIndexes = [super removeSections:sectionsToBeRemoved];
+    if (removedIndexes) {
+        [self removeSectionInCollectionViewAtIndexes:removedIndexes
+                                 withCompletionBlock:^(BOOL finished) {
+                                   completion(removedIndexes);
+                                 }];
+    }
+    return removedIndexes;
+}
+
 @end

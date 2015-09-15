@@ -27,9 +27,6 @@
     }
     return self;
 }
-+ (instancetype) new {
-    return [[SSOBaseProvider alloc] init];
-}
 
 + (instancetype)newProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
 
@@ -158,4 +155,45 @@
     return removedIndexes;
 }
 
+#pragma mark - Section
+
+- (BOOL)addNewSections:(NSArray *)newSections {
+    [self.sections addObjectsFromArray:newSections];
+    return YES;
+}
+
+- (BOOL)addNewSection:(SSOProviderSection *)newSection AtIndex:(NSInteger)sectionIndex {
+    if (self.sections.count > sectionIndex) {
+        [self.sections insertObject:newSection atIndex:sectionIndex];
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)removeSectionAtIndex:(NSInteger)sectionIndex {
+    if (self.sections.count > sectionIndex) {
+        [self.sections removeObjectAtIndex:sectionIndex];
+        return YES;
+    }
+    return NO;
+}
+
+- (NSArray *)removeSections:(NSArray *)sectionsToBeRemoved {
+    if (!sectionsToBeRemoved) {
+        return nil;
+    }
+
+    NSMutableArray *deletedIndexes = [NSMutableArray arrayWithCapacity:sectionsToBeRemoved.count];
+    NSArray *sections = self.sections;
+    NSInteger index;
+    for (SSOProviderSection *section in sectionsToBeRemoved) {
+        index = [sections indexOfObject:section];
+        if (index != NSNotFound) {
+            [deletedIndexes addObject:@(index)];
+            [self.sections removeObjectAtIndex:index];
+        }
+    }
+
+    return deletedIndexes;
+}
 @end
