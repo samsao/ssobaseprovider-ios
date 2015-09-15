@@ -49,6 +49,9 @@
 }
 
 - (BOOL)addItemsToSection:(NSArray *)itemsToAdd {
+    if (!itemsToAdd) {
+        return NO;
+    }
     for (SSOProviderItem *item in itemsToAdd) {
         NSAssert([item isKindOfClass:[SSOProviderItem class]], @"items in the section must be of type SSOProviderItem");
         [self.items addObject:item];
@@ -57,6 +60,9 @@
 }
 
 - (NSArray *)removeItemsFromSection:(NSArray *)itemsToRemove {
+    if (!itemsToRemove) {
+        return nil;
+    }
     NSMutableArray *removedIndexes = [NSMutableArray arrayWithCapacity:itemsToRemove.count];
     NSMutableArray *tempData = [NSMutableArray arrayWithArray:self.items];
     NSInteger itemIndex;
@@ -80,7 +86,7 @@
 }
 
 - (BOOL)addItemToSection:(SSOProviderItem *)item atIndex:(NSInteger)index {
-    if (index < self.items.count) {
+    if (index >= 0 && index < self.items.count) {
         [self.items insertObject:item atIndex:index];
         return YES;
     }

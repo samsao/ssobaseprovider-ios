@@ -25,7 +25,9 @@
                           onBundleOrNil:(NSBundle *)nibBundle {
     SSOProviderItem *item = [SSOProviderItem new];
     if (item) {
+        NSAssert(cellReusableID != nil, @"cellReusableID should not be nil.");
         item.cellReusableIdentifier = cellReusableID;
+        NSAssert(cellNibName != nil, @"cellNibName should not be nil.");
         item.cellNibName = cellNibName;
         item.cellNibBundle = nibBundle;
         item.data = data;

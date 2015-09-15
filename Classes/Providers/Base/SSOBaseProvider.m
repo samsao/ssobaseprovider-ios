@@ -33,6 +33,8 @@
 
 + (instancetype)newProviderWithData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
 
+    NSAssert(providerData != nil, @"providerData should Not be nil");
+
     // Looping trough all items in array to check if they're of SSOProviderSection Type.
     for (SSOProviderSection *section in providerData) {
         NSAssert(([section isKindOfClass:[SSOProviderSection class]]), @"providerData should be an array of SSOProviderSection.");
@@ -141,8 +143,7 @@
 - (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
     if (self.sections.count > section) {
         SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        [dataSection addItemsToSection:newObjects];
-        return YES;
+        return [dataSection addItemsToSection:newObjects];
     }
     return NO;
 }
