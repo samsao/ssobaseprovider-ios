@@ -33,7 +33,6 @@
 		D8C83E6D1AE1B64700F187F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E6B1AE1B64700F187F1 /* Main.storyboard */; };
 		D8C83E6F1AE1B64700F187F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E6E1AE1B64700F187F1 /* Images.xcassets */; };
 		D8C83E721AE1B64700F187F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E701AE1B64700F187F1 /* LaunchScreen.xib */; };
-		D8C83E7E1AE1B64700F187F1 /* SSOBaseProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */; };
 		D8C83E961AE1C0EB00F187F1 /* SSCellViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */; };
 		D8C83E971AE1C0EB00F187F1 /* SSCellViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C83E8C1AE1C0EB00F187F1 /* SSCellViewSection.m */; };
 		D8C83E9E1AE1C25D00F187F1 /* SSOBaseProvider.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D8C83E9D1AE1C25D00F187F1 /* SSOBaseProvider.podspec */; };
@@ -97,7 +96,6 @@
 		D8C83E711AE1B64700F187F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D8C83E771AE1B64700F187F1 /* SSOBaseProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSOBaseProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C83E7C1AE1B64700F187F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSOBaseProviderTests.m; sourceTree = "<group>"; };
 		D8C83E891AE1C0EB00F187F1 /* SSCellViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewItem.h; sourceTree = "<group>"; };
 		D8C83E8A1AE1C0EB00F187F1 /* SSCellViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCellViewItem.m; sourceTree = "<group>"; };
 		D8C83E8B1AE1C0EB00F187F1 /* SSCellViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCellViewSection.h; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 		D8C83E7A1AE1B64700F187F1 /* SSOBaseProviderTests */ = {
 			isa = PBXGroup;
 			children = (
-				D8C83E7D1AE1B64700F187F1 /* SSOBaseProviderTests.m */,
 				D8C83E7B1AE1B64700F187F1 /* Supporting Files */,
 				42F0A22B1BA732B10004B9CA /* SSOBaseProviderSpec.m */,
 			);
@@ -363,7 +360,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SSO;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Samsao;
 				TargetAttributes = {
 					D8C83E5D1AE1B64700F187F1 = {
@@ -484,7 +481,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F0A22C1BA732B10004B9CA /* SSOBaseProviderSpec.m in Sources */,
-				D8C83E7E1AE1B64700F187F1 /* SSOBaseProviderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +535,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -608,6 +605,7 @@
 				INFOPLIST_FILE = SSOBaseProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samsao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -620,6 +618,7 @@
 				INFOPLIST_FILE = SSOBaseProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samsao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -639,6 +638,7 @@
 				);
 				INFOPLIST_FILE = SSOBaseProviderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samsao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSOBaseProvider.app/SSOBaseProvider";
 			};
@@ -655,6 +655,7 @@
 				);
 				INFOPLIST_FILE = SSOBaseProviderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samsao.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSOBaseProvider.app/SSOBaseProvider";
 			};
