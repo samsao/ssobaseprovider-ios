@@ -16,6 +16,8 @@
 
 - (instancetype)init __deprecated_msg("deprecated, use custom initializer +(instancetype)newProviderForTableView:withData:andDelegate:");
 
+#pragma mark - Initialization
+
 /**
  *  Create a instance of provider class with tableview, data and delegate.
  *  Set tableview delegate and datasource to the new provider instance.

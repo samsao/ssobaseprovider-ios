@@ -12,6 +12,8 @@
 
 @interface SSOBaseCollectionViewProvider : SSOBaseProvider <UICollectionViewDelegate, UICollectionViewDataSource>
 
+#pragma mark - Initialization
+
 /**
  *  Create a instance of provider class with a collection view, data and delegate.
  *  Set collection view delegate and datasource to the new provider instance.
@@ -23,6 +25,8 @@
  *  @return instance of table view provider class
  */
 + (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate;
+
+#pragma mark - Object management
 
 /**
  *  This method should not be used. Use RemoveSections instead.

@@ -12,6 +12,11 @@
 @protocol SSOProviderCellProtocol
 
 @required
+/**
+ *  Called everytime a cell is dequeued. This is where the logic of the view should be done
+ *
+ *  @param cellData the cell data
+ */
 - (void)configureCell:(id)cellData;
 
 @end

@@ -10,16 +10,27 @@
 #import <UIKit/UIKit.h>
 
 @interface SSOProviderItem : NSObject
-/*!
- *  @property cellReusableIdentifier
- *
- */
+
+
 @property(strong, nonatomic, readonly) NSString *cellReusableIdentifier;
 @property(strong, nonatomic, readonly) NSString *cellNibName;
 @property(strong, nonatomic, readonly) NSBundle *cellNibBundle;
 @property(strong, nonatomic, readonly) id data;
+
 @property(nonatomic) CGFloat cellHeight;
 
+#pragma mark - Initialization
+
+/**
+ *  Create new SSOProviderItem with properties
+ *
+ *  @param data           the data
+ *  @param cellReusableID the cell reusable ID
+ *  @param cellNibName    the cell nib name
+ *  @param nibBundle      the nib bundle
+ *
+ *  @return the new object
+ */
 + (instancetype)newProviderItemWithData:(id)data
                      reusableIdentifier:(NSString *)cellReusableID
                             cellNibName:(NSString *)cellNibName

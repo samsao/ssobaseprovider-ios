@@ -86,7 +86,7 @@
     }
 }
 
-#pragma mark - Data
+#pragma mark - Object management
 
 - (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
     [super addObjectToProviderData:newObject inSection:section];
@@ -100,14 +100,6 @@
     NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:removedIndex inSection:section];
     if (deleteIndex >= 0) {
         [self.collectionView deleteItemsAtIndexPaths:@[ deleteIndex ]];
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
-    if ([super updateProviderData:newData inSection:section]) {
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
         return YES;
     }
     return NO;
@@ -153,7 +145,7 @@
     return removedIndexes;
 }
 
-#pragma mark - Section
+#pragma mark - Section management
 
 /**
  *  Private Method.
@@ -207,6 +199,16 @@
                                  }];
     }
     return removedIndexes;
+}
+
+#pragma mark - Utilities
+
+- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
+    if ([super updateProviderData:newData inSection:section]) {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
+        return YES;
+    }
+    return NO;
 }
 
 @end

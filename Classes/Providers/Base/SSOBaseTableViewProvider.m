@@ -21,7 +21,7 @@
 
 @implementation SSOBaseTableViewProvider
 
-#pragma mark - UITableViewDataSource
+#pragma mark - Initialization
 
 - (instancetype)init {
 
@@ -43,10 +43,11 @@
         tableView.delegate = provider;
         tableView.dataSource = provider;
         provider.tableView = tableView;
-        //        [tableView reloadData];
     }
     return provider;
 }
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self sectionAtIndex:section].sectionItems.count;
@@ -259,7 +260,7 @@
     [imageView.layer addAnimation:rotate forKey:@"10"];
 }
 
-#pragma mark - Data
+#pragma mark - Object management
 
 /**
  *  Private method.
@@ -354,7 +355,7 @@
     return removedIndexes;
 }
 
-#pragma mark - Section
+#pragma mark - Section management
 /**
  *  Private method.
  *  Add a new section in table view at index set.
