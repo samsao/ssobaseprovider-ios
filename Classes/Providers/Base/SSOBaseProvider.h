@@ -16,9 +16,6 @@
 
 @property(weak, nonatomic, readonly) id<SSOProviderDelegate> delegate;
 
-- (instancetype)init __deprecated_msg("Use newProviderWithData: andDelegate: instead.");
-+ (instancetype) new __deprecated_msg("Use newProviderWithData: andDelegate: instead.");
-
 #pragma mark - Initialization
 
 /**
