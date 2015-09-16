@@ -1,6 +1,6 @@
 //
 //  SSOBaseCollectionViewProvider.m
-//  Wink
+//  SSOBaseProvider
 //
 //  Created by Gabriel Cartier on 2015-04-13.
 //  Copyright (c) 2015 Samsao. All rights reserved.

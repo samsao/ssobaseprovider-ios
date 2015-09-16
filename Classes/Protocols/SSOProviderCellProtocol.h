@@ -1,9 +1,9 @@
 //
 //  SSOProviderCellProtocol.h
-//  Kwirk
+//  SSOBaseProvider
 //
 //  Created by Nicolas VINCENSINI on 2014-07-30.
-//  Copyright (c) 2014 Kwirk Software Inc. All rights reserved.
+//  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

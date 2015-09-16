@@ -1,5 +1,5 @@
 //
-//  SSOBaseTableViewItem.h
+//  SSOBaseProvider.h
 //  SSOBaseProvider
 //
 //  Created by Gabriel Cartier on 2014-05-02.

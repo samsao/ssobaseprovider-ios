@@ -1,6 +1,6 @@
 //
 //  SSOBaseTableViewProvider.m
-//  Adbeus Coffee
+//  SSOBaseProvider
 //
 //  Created by Nicolas Vincensini on 2015-01-07.
 //  Copyright (c) 2015 Samsao. All rights reserved.
