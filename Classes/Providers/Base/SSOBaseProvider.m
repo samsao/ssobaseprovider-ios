@@ -66,13 +66,6 @@
 
 #pragma mark - Utilities
 
-- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
-    SSOProviderSection *section = [self.sections objectAtIndex:indexPath.section];
-    SSOProviderItem *item = [section.sectionItems objectAtIndex:indexPath.row];
-
-    return item;
-}
-
 - (NSIndexPath *)indexPathForObject:(id)object {
     for (SSOProviderSection *section in self.sections) {
         for (SSOProviderItem *item in section.sectionItems) {
@@ -85,6 +78,13 @@
 }
 
 #pragma mark - Getter
+
+- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    SSOProviderSection *section = [self.sections objectAtIndex:indexPath.section];
+    SSOProviderItem *item = [section.sectionItems objectAtIndex:indexPath.row];
+
+    return item;
+}
 
 - (SSOProviderSection *)sectionAtIndex:(NSInteger)sectionIndex {
     return [self.sections objectAtIndex:sectionIndex];
@@ -147,19 +147,6 @@
     return NO;
 }
 
-- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
-    NSInteger removedIndex = -1;
-    if (self.sections.count > section) {
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];
-        if (indexes) {
-            NSNumber *value = indexes.firstObject;
-            return value.integerValue;
-        }
-    }
-    return removedIndex;
-}
-
 - (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
     if (self.sections.count > indexPath.section) {
         SSOProviderSection *section = self.sections[indexPath.section];
@@ -176,10 +163,22 @@
     return NO;
 }
 
+- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
+    NSInteger removedIndex = -1;
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];
+        if (indexes) {
+            NSNumber *value = indexes.firstObject;
+            return value.integerValue;
+        }
+    }
+    return removedIndex;
+}
+
 - (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
     NSArray *removedIndexes;
     if (self.sections.count > section) {
-        removedIndexes = [NSMutableArray arrayWithCapacity:objectsToRemove.count];
         SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
         removedIndexes = [dataSection removeItemsFromSection:objectsToRemove];
     }

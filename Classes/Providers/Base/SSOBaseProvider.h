@@ -47,15 +47,6 @@
 #pragma mark - Utilities
 
 /**
- *  Get the cell view item from an index path. This will get the cell view item
- *
- *  @param indexPath the index path
- *
- *  @return the cell view item
- */
-- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
  *  Get the index path for a specific object
  *
  *  @param object the object
@@ -65,6 +56,15 @@
 - (NSIndexPath *)indexPathForObject:(id)object;
 
 #pragma mark - Getter
+
+/**
+ *  Get the cell view item from an index path. This will get the cell view item
+ *
+ *  @param indexPath the index path
+ *
+ *  @return the cell view item
+ */
+- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Get the section object for an index.
