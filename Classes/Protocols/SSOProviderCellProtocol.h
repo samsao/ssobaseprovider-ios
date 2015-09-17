@@ -1,9 +1,9 @@
 //
 //  SSOProviderCellProtocol.h
-//  Kwirk
+//  SSOBaseProvider
 //
 //  Created by Nicolas VINCENSINI on 2014-07-30.
-//  Copyright (c) 2014 Kwirk Software Inc. All rights reserved.
+//  Copyright (c) 2015 Samsao. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,6 +12,11 @@
 @protocol SSOProviderCellProtocol
 
 @required
+/**
+ *  Called everytime a cell is dequeued. This is where the logic of the view should be done
+ *
+ *  @param cellData the cell data
+ */
 - (void)configureCell:(id)cellData;
 
 @end

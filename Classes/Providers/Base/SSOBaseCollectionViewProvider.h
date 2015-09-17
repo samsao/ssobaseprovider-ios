@@ -1,6 +1,6 @@
 //
 //  SSOBaseCollectionViewProvider.h
-//  Wink
+//  SSOBaseProvider
 //
 //  Created by Gabriel Cartier on 2015-04-13.
 //  Copyright (c) 2015 Samsao. All rights reserved.
@@ -11,6 +11,8 @@
 #import "SSOBaseProvider.h"
 
 @interface SSOBaseCollectionViewProvider : SSOBaseProvider <UICollectionViewDelegate, UICollectionViewDataSource>
+
+#pragma mark - Initialization
 
 /**
  *  Create a instance of provider class with a collection view, data and delegate.
@@ -23,6 +25,8 @@
  *  @return instance of table view provider class
  */
 + (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate;
+
+#pragma mark - Object management
 
 /**
  *  This method should not be used. Use RemoveSections instead.

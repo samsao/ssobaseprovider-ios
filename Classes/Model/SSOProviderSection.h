@@ -12,15 +12,6 @@
 
 @interface SSOProviderSection : NSObject
 
-/**
- *  Create New section with objects to be displayed in this section
- *
- *  @param sectionData data for the section
- *
- *  @return instance of SSCellViewSection with data.
- */
-+ (instancetype)newSectionWithData:(NSArray *)sectionData;
-
 #pragma mark Text properties
 
 // The name of the section. Will be displayed in a label.
@@ -49,7 +40,38 @@
 // Specify a frame for the imageView.
 @property(nonatomic) CGRect expandImageFrame;
 
-#pragma mark Data
+#pragma mark Expand
+
+// The index of the section in the tableView.
+@property(nonatomic) NSInteger sectionIndex;
+
+// NO by default.
+@property(nonatomic) BOOL isSearchable;
+
+// NO by default. If set to YES, the section's header become expandable on touch.
+@property(nonatomic) BOOL isExpendable;
+
+// BOOL for the state of the section. This can be used to determine if the section start expanded or not.
+@property(nonatomic) BOOL expended;
+
+// Check if the section was collapsed before making a new animation of the arrow. ** No need to use this. **
+@property(nonatomic) BOOL wasCollapsed;
+
+// Set if we want to animate the imageView in the section.
+@property(nonatomic) BOOL shouldAnimateSectionImageOnExpand;
+
+#pragma mark - Initialization
+
+/**
+ *  Create New section with objects to be displayed in this section
+ *
+ *  @param sectionData data for the section
+ *
+ *  @return instance of SSCellViewSection with data.
+ */
++ (instancetype)newSectionWithData:(NSArray *)sectionData;
+
+#pragma mark - Data management
 
 /**
  *  Array of items in the section
@@ -92,25 +114,5 @@
  *  @return if the item as added or not to the section
  */
 - (BOOL)addItemToSection:(SSOProviderItem *)item atIndex:(NSInteger)index;
-
-// The index of the section in the tableView.
-@property(nonatomic) NSInteger sectionIndex;
-
-// NO by default.
-@property(nonatomic) BOOL isSearchable;
-
-#pragma mark Expand
-
-// NO by default. If set to YES, the section's header become expandable on touch.
-@property(nonatomic) BOOL isExpendable;
-
-// BOOL for the state of the section. This can be used to determine if the section start expanded or not.
-@property(nonatomic) BOOL expended;
-
-// Check if the section was collapsed before making a new animation of the arrow. ** No need to use this. **
-@property(nonatomic) BOOL wasCollapsed;
-
-// Set if we want to animate the imageView in the section.
-@property(nonatomic) BOOL shouldAnimateSectionImageOnExpand;
 
 @end

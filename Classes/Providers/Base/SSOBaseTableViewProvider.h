@@ -1,6 +1,6 @@
 //
 //  SSOBaseTableViewProvider.h
-//  Adbeus Coffee
+//  SSOBaseProvider
 //
 //  Created by Nicolas Vincensini on 2015-01-07.
 //  Copyright (c) 2015 Samsao. All rights reserved.
@@ -15,6 +15,8 @@
 @interface SSOBaseTableViewProvider : SSOBaseProvider <UITableViewDelegate, UITableViewDataSource>
 
 - (instancetype)init __deprecated_msg("deprecated, use custom initializer +(instancetype)newProviderForTableView:withData:andDelegate:");
+
+#pragma mark - Initialization
 
 /**
  *  Create a instance of provider class with tableview, data and delegate.

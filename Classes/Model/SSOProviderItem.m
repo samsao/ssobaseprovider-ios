@@ -19,6 +19,8 @@
 
 @implementation SSOProviderItem
 
+#pragma mark - Initialization
+
 + (instancetype)newProviderItemWithData:(id)data
                      reusableIdentifier:(NSString *)cellReusableID
                             cellNibName:(NSString *)cellNibName
@@ -35,9 +37,14 @@
     return item;
 }
 
+#pragma mark - NSObject
+
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[self class]]) {
         SSOProviderItem *otherItem = object;
+        // Check if both data of items are equal.
+        // Since data is an id, it will always work, the object should have it's own isEqual to work perfectly, otherwise it checks
+        // the memory address.
         return [self.data isEqual:otherItem.data];
     }
     return NO;

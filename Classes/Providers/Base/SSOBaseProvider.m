@@ -66,13 +66,6 @@
 
 #pragma mark - Utilities
 
-- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
-    SSOProviderSection *section = [self.sections objectAtIndex:indexPath.section];
-    SSOProviderItem *item = [section.sectionItems objectAtIndex:indexPath.row];
-
-    return item;
-}
-
 - (NSIndexPath *)indexPathForObject:(id)object {
     for (SSOProviderSection *section in self.sections) {
         for (SSOProviderItem *item in section.sectionItems) {
@@ -86,6 +79,13 @@
 
 #pragma mark - Getter
 
+- (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    SSOProviderSection *section = [self.sections objectAtIndex:indexPath.section];
+    SSOProviderItem *item = [section.sectionItems objectAtIndex:indexPath.row];
+
+    return item;
+}
+
 - (SSOProviderSection *)sectionAtIndex:(NSInteger)sectionIndex {
     return [self.sections objectAtIndex:sectionIndex];
 }
@@ -94,68 +94,7 @@
     return self.sections;
 }
 
-#pragma mark - Data
-
-- (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
-    NSInteger sectionsAmt = self.sections.count;
-    if (sectionsAmt > section) {
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        return [dataSection addItemsToSection:@[ newObject ]];
-    }
-    return NO;
-}
-
-- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
-    NSInteger removedIndex = -1;
-    if (self.sections.count > section) {
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];
-        if (indexes) {
-            NSNumber *value = indexes.firstObject;
-            return value.integerValue;
-        }
-    }
-    return removedIndex;
-}
-
-- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
-
-    if (self.sections.count > section) {
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        [dataSection updateSectionDataTo:newData];
-        return YES;
-    }
-
-    return NO;
-}
-
-- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
-    if (self.sections.count > indexPath.section) {
-        SSOProviderSection *section = self.sections[indexPath.section];
-        return [section addItemToSection:newObject atIndex:indexPath.row];
-    }
-    return NO;
-}
-
-- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
-    if (self.sections.count > section) {
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        return [dataSection addItemsToSection:newObjects];
-    }
-    return NO;
-}
-
-- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
-    NSArray *removedIndexes;
-    if (self.sections.count > section) {
-        removedIndexes = [NSMutableArray arrayWithCapacity:objectsToRemove.count];
-        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
-        removedIndexes = [dataSection removeItemsFromSection:objectsToRemove];
-    }
-    return removedIndexes;
-}
-
-#pragma mark - Section
+#pragma mark - Section management
 
 - (BOOL)addNewSections:(NSArray *)newSections {
     [self.sections addObjectsFromArray:newSections];
@@ -196,4 +135,67 @@
 
     return deletedIndexes;
 }
+
+#pragma mark - Object management
+
+- (BOOL)addObjectToProviderData:(id)newObject inSection:(NSInteger)section {
+    NSInteger sectionsAmt = self.sections.count;
+    if (sectionsAmt > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        return [dataSection addItemsToSection:@[ newObject ]];
+    }
+    return NO;
+}
+
+- (BOOL)addObject:(id)newObject atIndexPath:(NSIndexPath *)indexPath {
+    if (self.sections.count > indexPath.section) {
+        SSOProviderSection *section = self.sections[indexPath.section];
+        return [section addItemToSection:newObject atIndex:indexPath.row];
+    }
+    return NO;
+}
+
+- (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        return [dataSection addItemsToSection:newObjects];
+    }
+    return NO;
+}
+
+- (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
+    NSInteger removedIndex = -1;
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];
+        if (indexes) {
+            NSNumber *value = indexes.firstObject;
+            return value.integerValue;
+        }
+    }
+    return removedIndex;
+}
+
+- (NSArray *)removeObjectsFromProvider:(NSArray *)objectsToRemove inSection:(NSInteger)section {
+    NSArray *removedIndexes;
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        removedIndexes = [dataSection removeItemsFromSection:objectsToRemove];
+    }
+    return removedIndexes;
+}
+
+#pragma mark - Data management
+
+- (BOOL)updateProviderData:(NSArray *)newData inSection:(NSInteger)section {
+
+    if (self.sections.count > section) {
+        SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
+        [dataSection updateSectionDataTo:newData];
+        return YES;
+    }
+
+    return NO;
+}
+
 @end
