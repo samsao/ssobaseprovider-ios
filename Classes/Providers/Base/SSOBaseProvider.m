@@ -164,7 +164,7 @@
 }
 
 - (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section {
-    NSInteger removedIndex = -1;
+    NSInteger removedIndex = NSNotFound;
     if (self.sections.count > section) {
         SSOProviderSection *dataSection = [self.sections objectAtIndex:section];
         NSArray *indexes = [dataSection removeItemsFromSection:@[ objectToRemove ]];

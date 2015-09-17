@@ -160,7 +160,7 @@
  *  @param objectToRemove object to be removed
  *  @param section section to remove the object from
  *
- *  @return index of deleted object. -1 in case object does not exists in section.
+ *  @return index of deleted object. NSNotFound in case object does not exists in section.
  */
 - (NSInteger)removeObjectFromProvider:(id)objectToRemove inSection:(NSInteger)section;
 
