@@ -37,7 +37,7 @@
 
 + (instancetype)newProviderForTableView:(UITableView *)tableView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
 
-    SSOBaseTableViewProvider *provider = [[SSOBaseTableViewProvider alloc] initProviderWithData:providerData andDelegate:delegate];
+    SSOBaseTableViewProvider *provider = [[self alloc] initProviderWithData:providerData andDelegate:delegate];
     if (provider) {
         provider.arrayAnimationState = [NSMutableArray new];
         tableView.delegate = provider;

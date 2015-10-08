@@ -17,7 +17,11 @@
 @implementation SSOProviderSection
 
 + (instancetype)newSectionWithData:(NSArray *)sectionData {
-    SSOProviderSection *section = [[SSOProviderSection alloc] init];
+
+    for (SSOProviderItem *item in sectionData) {
+        NSAssert([item isKindOfClass:[SSOProviderItem class]], @"items in the section must be of type SSOProviderItem");
+    }
+    SSOProviderSection *section = [[self alloc] init];
     if (section) {
         section.items = [NSMutableArray arrayWithArray:sectionData];
     }

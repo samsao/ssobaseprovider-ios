@@ -21,7 +21,7 @@
 #pragma mark - Initialization
 
 + (instancetype)newProviderForTableView:(UICollectionView *)collectionView withData:(NSArray *)providerData andDelegate:(id<SSOProviderDelegate>)delegate {
-    SSOBaseCollectionViewProvider *provider = [[SSOBaseCollectionViewProvider alloc] initProviderWithData:providerData andDelegate:delegate];
+    SSOBaseCollectionViewProvider *provider = [[self alloc] initProviderWithData:providerData andDelegate:delegate];
     if (provider) {
         collectionView.delegate = provider;
         collectionView.dataSource = provider;

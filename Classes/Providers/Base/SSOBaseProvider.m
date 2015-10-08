@@ -39,7 +39,7 @@
 
 // Here we ignore the warning, since deprecation is only external to make sure the use of the proper initializer
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    SSOBaseProvider *provider = [SSOBaseProvider new];
+    SSOBaseProvider *provider = [self new];
     if (provider) {
         provider.sections = [NSMutableArray arrayWithArray:providerData];
         provider.delegate = delegate;

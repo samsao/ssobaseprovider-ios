@@ -25,7 +25,7 @@
                      reusableIdentifier:(NSString *)cellReusableID
                             cellNibName:(NSString *)cellNibName
                           onBundleOrNil:(NSBundle *)nibBundle {
-    SSOProviderItem *item = [SSOProviderItem new];
+    SSOProviderItem *item = [self new];
     if (item) {
         NSAssert(cellReusableID != nil, @"cellReusableID should not be nil.");
         item.cellReusableIdentifier = cellReusableID;
