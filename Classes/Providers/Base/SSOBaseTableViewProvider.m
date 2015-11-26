@@ -61,8 +61,12 @@
     SSOProviderSection *tableViewSection = [self sectionAtIndex:indexPath.section];
     SSOProviderItem *tableViewElement = [tableViewSection.sectionItems objectAtIndex:indexPath.row];
 
-    [tableView registerNib:[UINib nibWithNibName:tableViewElement.cellNibName bundle:tableViewElement.cellNibBundle]
-        forCellReuseIdentifier:tableViewElement.cellReusableIdentifier];
+    if (tableViewElement.cellNibName != nil) {
+        [tableView registerNib:[UINib nibWithNibName:tableViewElement.cellNibName bundle:tableViewElement.cellNibBundle]
+            forCellReuseIdentifier:tableViewElement.cellReusableIdentifier];
+    } else {
+        [tableView registerClass:tableViewElement.cellClass forCellReuseIdentifier:tableViewElement.cellReusableIdentifier];
+    }
 
     id cell = [tableView dequeueReusableCellWithIdentifier:tableViewElement.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {

@@ -44,8 +44,12 @@
     SSOProviderSection *collectionViewSection = [self sectionAtIndex:indexPath.section];
     SSOProviderItem *collectionViewElement = [collectionViewSection.sectionItems objectAtIndex:indexPath.row];
 
-    [collectionView registerNib:[UINib nibWithNibName:collectionViewElement.cellNibName bundle:collectionViewElement.cellNibBundle]
-        forCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier];
+    if (collectionViewElement.cellNibName != nil) {
+        [collectionView registerNib:[UINib nibWithNibName:collectionViewElement.cellNibName bundle:collectionViewElement.cellNibBundle]
+            forCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier];
+    } else {
+        [collectionView registerClass:collectionViewElement.cellClass forCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier];
+    }
     id cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewElement.cellReusableIdentifier forIndexPath:indexPath];
     if ([cell respondsToSelector:@selector(configureCell:)]) {
         [cell configureCell:collectionViewElement.data];
