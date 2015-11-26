@@ -9,10 +9,10 @@
 #import "SSOProviderItem.h"
 
 @interface SSOProviderItem ()
-
 @property(strong, nonatomic, readwrite) NSString *cellReusableIdentifier;
 @property(strong, nonatomic, readwrite) NSString *cellNibName;
 @property(strong, nonatomic, readwrite) NSBundle *cellNibBundle;
+@property(strong, nonatomic, readwrite) Class cellClass;
 @property(strong, nonatomic, readwrite) id data;
 
 @end
@@ -29,9 +29,21 @@
     if (item) {
         NSAssert(cellReusableID != nil, @"cellReusableID should not be nil.");
         item.cellReusableIdentifier = cellReusableID;
-        NSAssert(cellNibName != nil, @"cellNibName should not be nil.");
+        //        NSAssert(cellNibName != nil, @"cellNibName should not be nil.");
         item.cellNibName = cellNibName;
         item.cellNibBundle = nibBundle;
+        item.data = data;
+    }
+    return item;
+}
+
++ (instancetype)newProviderItemWithData:(id)data reusableIdentifier:(NSString *)cellReusableID cellClass:(Class)cellClass {
+    SSOProviderItem *item = [self new];
+    if (item) {
+        NSAssert(cellReusableID != nil, @"cellReusableID should not be nil.");
+        item.cellReusableIdentifier = cellReusableID;
+        NSAssert(cellClass != nil, @"cellClass should not be nil.");
+        item.cellClass = cellClass;
         item.data = data;
     }
     return item;

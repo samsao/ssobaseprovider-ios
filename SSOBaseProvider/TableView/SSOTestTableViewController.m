@@ -11,6 +11,7 @@
 #import "SSOProviderSection.h"
 #import "SSOProviderItem.h"
 #import "SSOTestModel.h"
+#import "SSONoNibCell.h"
 
 NSString *const kReuseIdentifier = @"RITest";
 NSString *const kCellNib = @"SSOTestCell";
@@ -68,12 +69,12 @@ NSString *const kCellNib = @"SSOTestCell";
     b.namingString = @"Pesti";
     SSOTestModel *c = [SSOTestModel new];
     c.namingString = @"Pesh";
-
     SSOProviderItem *i1 = [SSOProviderItem newProviderItemWithData:a reusableIdentifier:kReuseIdentifier cellNibName:kCellNib onBundleOrNil:nil];
     SSOProviderItem *i2 = [SSOProviderItem newProviderItemWithData:b reusableIdentifier:kReuseIdentifier cellNibName:kCellNib onBundleOrNil:nil];
     SSOProviderItem *i3 = [SSOProviderItem newProviderItemWithData:c reusableIdentifier:kReuseIdentifier cellNibName:kCellNib onBundleOrNil:nil];
+    SSOProviderItem *i4 = [SSOProviderItem newProviderItemWithData:a reusableIdentifier:@"RITest2" cellClass:NSClassFromString(@"SSONoNibCell")];
 
-    SSOProviderSection *section = [SSOProviderSection newSectionWithData:@[ i1, i2, i3 ]];
+    SSOProviderSection *section = [SSOProviderSection newSectionWithData:@[ i1, i2, i3, i4 ]];
     return @[ section ];
 }
 

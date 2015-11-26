@@ -10,6 +10,7 @@
 		33619E9B1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 33619E9A1B04F72200D09ECC /* SSOTableViewHeaderTapGesture.m */; };
 		4223B4E21BA1E2CA00457C0B /* SSOTestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4223B4E01BA1E2CA00457C0B /* SSOTestCollectionCell.m */; };
 		4223B4E31BA1E2CA00457C0B /* SSOTestCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4223B4E11BA1E2CA00457C0B /* SSOTestCollectionCell.xib */; };
+		4267056D1C07AC9E008E425A /* SSONoNibCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4267056C1C07AC9E008E425A /* SSONoNibCell.m */; };
 		42D9BD7A1BA0C56B00FF5E03 /* SSOProviderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD791BA0C56B00FF5E03 /* SSOProviderItem.m */; };
 		42D9BD7D1BA0C5CB00FF5E03 /* SSOProviderSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD7C1BA0C5CB00FF5E03 /* SSOProviderSection.m */; };
 		42D9BD821BA0DB6000FF5E03 /* SSOTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9BD811BA0DB6000FF5E03 /* SSOTestTableViewController.m */; };
@@ -44,6 +45,8 @@
 		4223B4DF1BA1E2CA00457C0B /* SSOTestCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOTestCollectionCell.h; sourceTree = "<group>"; };
 		4223B4E01BA1E2CA00457C0B /* SSOTestCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOTestCollectionCell.m; sourceTree = "<group>"; };
 		4223B4E11BA1E2CA00457C0B /* SSOTestCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSOTestCollectionCell.xib; sourceTree = "<group>"; };
+		4267056B1C07AC9E008E425A /* SSONoNibCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSONoNibCell.h; sourceTree = "<group>"; };
+		4267056C1C07AC9E008E425A /* SSONoNibCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSONoNibCell.m; sourceTree = "<group>"; };
 		42D9BD781BA0C56B00FF5E03 /* SSOProviderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderItem.h; sourceTree = "<group>"; };
 		42D9BD791BA0C56B00FF5E03 /* SSOProviderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOProviderItem.m; sourceTree = "<group>"; };
 		42D9BD7B1BA0C5CB00FF5E03 /* SSOProviderSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOProviderSection.h; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				42D9BD861BA0E12C00FF5E03 /* SSOTestCell.h */,
 				42D9BD871BA0E12C00FF5E03 /* SSOTestCell.m */,
 				42D9BD881BA0E12C00FF5E03 /* SSOTestCell.xib */,
+				4267056B1C07AC9E008E425A /* SSONoNibCell.h */,
+				4267056C1C07AC9E008E425A /* SSONoNibCell.m */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				42D9BD851BA0DB7000FF5E03 /* SSOTestCollectionViewController.m in Sources */,
 				42D9BD8D1BA0E4A700FF5E03 /* SSOTestModel.m in Sources */,
 				D8C83E671AE1B64700F187F1 /* AppDelegate.m in Sources */,
+				4267056D1C07AC9E008E425A /* SSONoNibCell.m in Sources */,
 				4223B4E21BA1E2CA00457C0B /* SSOTestCollectionCell.m in Sources */,
 				42D9BD7A1BA0C56B00FF5E03 /* SSOProviderItem.m in Sources */,
 				42D9BD821BA0DB6000FF5E03 /* SSOTestTableViewController.m in Sources */,
