@@ -7,9 +7,9 @@
 //
 
 #import "SSOBaseTableViewProvider.h"
-#import "SSOTableViewHeaderTapGesture.h"
 #import "SSOProviderItem.h"
 #import "SSOProviderSection.h"
+#import "SSOTableViewHeaderTapGesture.h"
 
 @interface SSOBaseTableViewProvider ()
 
@@ -331,7 +331,7 @@
 - (BOOL)addObjectsToProviderData:(NSArray *)newObjects inSection:(NSInteger)section {
     if ([super addObjectsToProviderData:newObjects inSection:section]) {
         SSOProviderSection *tableSection = [self sectionAtIndex:section];
-        NSInteger rowIndex = tableSection.sectionItems.count - newObjects.count - 1;
+        NSInteger rowIndex = tableSection.sectionItems.count - newObjects.count;
         NSIndexPath *indexPath;
         NSMutableArray *indexesArray = [NSMutableArray arrayWithCapacity:newObjects.count];
         for (; rowIndex < tableSection.sectionItems.count; rowIndex++) {
