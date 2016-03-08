@@ -90,7 +90,7 @@
 }
 
 - (BOOL)addItemToSection:(SSOProviderItem *)item atIndex:(NSInteger)index {
-    if (index >= 0 && index < self.items.count) {
+    if (index >= 0 && index <= self.items.count) {
         [self.items insertObject:item atIndex:index];
         return YES;
     }
