@@ -77,6 +77,10 @@
     return nil;
 }
 
+- (void)nullifyDelegates {
+	return;
+}
+
 #pragma mark - Getter
 
 - (SSOProviderItem *)itemAtIndexPath:(NSIndexPath *)indexPath {

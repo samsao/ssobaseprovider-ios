@@ -215,4 +215,9 @@
     return NO;
 }
 
+- (void)nullifyDelegates {
+	_collectionView.delegate = nil;
+	_collectionView.dataSource = nil;
+}
+
 @end

@@ -51,6 +51,10 @@
  *  @return the index path of the object
  */
 - (NSIndexPath *)indexPathForObject:(id)object;
+/**
+ *  Set delegate to null, can be useful for race conditions on tableView or collectionView.
+ */
+- (void)nullifyDelegates;
 
 #pragma mark - Getter
 

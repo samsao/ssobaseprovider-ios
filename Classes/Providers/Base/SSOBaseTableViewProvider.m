@@ -264,6 +264,11 @@
     [imageView.layer addAnimation:rotate forKey:@"10"];
 }
 
+- (void)nullifyDelegates {
+	_tableView.delegate = nil;
+	_tableView.dataSource = nil;
+}
+
 #pragma mark - Object management
 
 /**
